@@ -1,0 +1,12 @@
+<p>formulario works!</p>
+<!-- <kc-elemento-formulario></kc-elemento-formulario> -->
+
+
+<h1>nueva implementacion</h1>
+
+<kc-dynamic [componentData]="dataElemento"></kc-dynamic>
+
+
+<div *ngFor="let elemento of elementosFormulario; let i=index">
+    <kc-dynamic [componentData]="elemento"></kc-dynamic>
+</div>
