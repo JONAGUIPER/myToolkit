@@ -1,4 +1,5 @@
-import { Component, ComponentFactoryResolver, Input, ReflectiveInjector, ViewChild, ViewContainerRef, Injector } from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, ReflectiveInjector, ViewChild, ViewContainerRef, Injector, EventEmitter, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'kc-dynamic',
@@ -10,7 +11,7 @@ export class DynamicComponent {
   currentComponent = null;
 
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef, static: true }) dynamicComponentContainer: ViewContainerRef;
-
+  @Input() formulario: FormGroup;
   @Input() set componentData(data: { component: any, inputs: any }) {
     if (!data) {
       return;
@@ -25,6 +26,7 @@ export class DynamicComponent {
             useValue: data.inputs[inputName]
           };
         });
+      inputProviders.push({ provide: 'formulario', useValue: this.formulario });
     }
     // const resolvedInputs = ReflectiveInjector.resolve(inputProviders);
 

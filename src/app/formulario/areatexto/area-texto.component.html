@@ -1,1 +1,7 @@
-<p>areatexto works!  {{tipoElemento}}  {{texto}}</p>
+<div [formGroup]="form">
+    <p>{{tipoElemento}} {{texto}}</p>
+    <!-- <textarea [formControlName]="name" [id]="name"></textarea> -->
+    <mat-form-field>
+        <textarea matInput placeholder="{{texto}}" [formControlName]="name" [id]="name"></textarea>
+    </mat-form-field>
+</div>

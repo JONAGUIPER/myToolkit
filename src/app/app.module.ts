@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,11 +9,21 @@ import { ElementoFormularioComponent } from './formulario/elemento-formulario/el
 import { FormularioComponent } from './formulario/formulario/formulario.component';
 import { DynamicComponent } from './formulario/dynamic/dynamic.component';
 import { AreaTextoComponent } from './formulario/areatexto/area-texto.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 const ENTRYCOMPONENTS = [
   AreaTextoComponent,
   CampoBasicoComponent
+];
+
+const MATERIALMODULES = [
+  MatFormFieldModule,
+  MatCardModule,
+  MatInputModule
 ];
 
 @NgModule({
@@ -22,10 +33,14 @@ const ENTRYCOMPONENTS = [
     FormularioComponent,
     DynamicComponent,
     ENTRYCOMPONENTS
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MATERIALMODULES
   ],
   providers: [],
   bootstrap: [AppComponent],

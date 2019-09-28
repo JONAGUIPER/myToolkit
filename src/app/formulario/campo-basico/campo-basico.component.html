@@ -1,1 +1,8 @@
-<p>{{texto}} {{tipoEllemento}}</p>
+<div [formGroup]="form">
+  <p>{{tipoElemento}} {{texto}}</p>
+  <!-- <input [formControlName]="name" [id]="name" [type]="text"> -->
+  <!-- <mat-card>Simple card</mat-card> -->
+  <mat-form-field>
+    <input matInput placeholder="{{texto}}" [formControlName]="name" [id]="name">
+  </mat-form-field>
+</div>

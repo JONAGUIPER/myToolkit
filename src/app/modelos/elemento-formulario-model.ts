@@ -1,22 +1,22 @@
 import { DataElementoFormularioModel } from './data-elemento-formulario-model';
-
-export class ElementoFormularioModel {
+//TODO: se puede cambiar para que T sea el tipo de fields (campobasico,AreaTexto, etc) en funcion a esto se cambie el tipo de value a string, array, etc
+export class ElementoFormularioModel<T> {
 
     constructor() {
-        return this.inner;
+        //return this.inner;
     }
 
-    inner: ElementoFormularioModel;
+    //inner: ElementoFormularioModel;
     component: any;
-    inputs: DataElementoFormularioModel;
+    inputs: DataElementoFormularioModel<T>;
 
-    buildWithComponent(component: any): ElementoFormularioModel {
-        this.inner.component = component;
-        return this.inner;
+    buildWithComponent(component: any): ElementoFormularioModel<T> {
+        this.component = component;
+        return this;
     }
 
-    buildWithInputs(inputs: DataElementoFormularioModel): ElementoFormularioModel {
-        this.inner.inputs = inputs;
-        return this.inner;
+    buildWithInputs(inputs: DataElementoFormularioModel<T>): ElementoFormularioModel<T> {
+        this.inputs = inputs;
+        return this;
     }
 }

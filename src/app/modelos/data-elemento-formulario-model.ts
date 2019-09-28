@@ -1,29 +1,42 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
-export class DataElementoFormularioModel {
-    constructor() {
-        return this.inner;
-    }
-
-    inner: DataElementoFormularioModel;
-    id: string;
+export class DataElementoFormularioModel<T> {
+    value: T;
+    name: string;
     texto: string;
-    value: string;
     tipoElemento: string;
+    obligatorio: boolean;
 
-    buildWithTexto(texto: string): DataElementoFormularioModel {
-        this.inner.texto = texto;
-        return this.inner;
+
+    constructor(options: {
+        value?: T,
+        name?: string,
+        texto?: string,
+        tipoElemento?: string,
+        obligatorio?: boolean,
+    } = {}) {
+        this.value = options.value;
+        this.name = options.name || '';
+        this.texto = options.texto || '';
+        this.tipoElemento = options.tipoElemento || '';
+        this.obligatorio = !!options.obligatorio;
     }
 
-    buildWithValue(value: string): DataElementoFormularioModel {
-        this.inner.value = value;
-        return this.inner;
+
+
+    buildWithTexto(texto: string): DataElementoFormularioModel<T> {
+        this.texto = texto;
+        return this;
     }
 
-    buildWithId(id: string): DataElementoFormularioModel {
-        this.inner.id = id;
-        return this.inner;
+    buildWithValue(value: T): DataElementoFormularioModel<T> {
+        this.value = value;
+        return this;
+    }
+
+    buildWithName(name: string): DataElementoFormularioModel<T> {
+        this.name = name;
+        return this;
     }
 
 
