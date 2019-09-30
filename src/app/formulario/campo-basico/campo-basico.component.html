@@ -1,8 +1,9 @@
 <div [formGroup]="form">
-  <p>{{tipoElemento}} {{texto}}</p>
+  <!-- <p>{{tipoElemento}} {{texto}}</p> -->
   <!-- <input [formControlName]="name" [id]="name" [type]="text"> -->
   <!-- <mat-card>Simple card</mat-card> -->
   <mat-form-field>
     <input matInput placeholder="{{texto}}" [formControlName]="name" [id]="name">
+    <mat-error *ngIf="!isValid">campo Invalido</mat-error>
   </mat-form-field>
 </div>

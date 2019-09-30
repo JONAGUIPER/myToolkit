@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./campo-basico.component.css']
 })
 export class CampoBasicoComponent extends ElementoFormularioComponent implements OnInit {
-  
+
 
   constructor(private injector: Injector) {
     super();
@@ -18,9 +18,7 @@ export class CampoBasicoComponent extends ElementoFormularioComponent implements
   }
 
   ngOnInit() {
-    this.texto = this.injector.get<string>('texto' as any);
-    this.name = this.injector.get<string>('name' as any);
-    this.form = this.injector.get<FormGroup>('formulario' as any);
+    this.setInputs(this.injector);
   }
 
 }

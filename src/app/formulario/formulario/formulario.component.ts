@@ -6,6 +6,7 @@ import { CampoBasicoComponent } from '../campo-basico/campo-basico.component';
 import { ElementoFormularioModel } from 'src/app/modelos/elemento-formulario-model';
 import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
 import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
+import { CollapsableComponent } from '../collapsable/collapsable.component';
 
 @Component({
   selector: 'kc-formulario',
@@ -28,21 +29,38 @@ export class FormularioComponent implements OnInit {
   constructor(private formGroupfactory: FormGroupFactoryService) { }
 
   ngOnInit() {
-    let camposJson = `{
+    const camposJson = `{
       "elementosFormulario": [
         {
-          "name":"campo1",
+          "name": "campo1",
           "elementoTipo": "campoBasico",
           "texto": "holamundo campobasico"
         },
         {
-          "name":"area1",
+          "name": "area1",
           "elementoTipo": "areaTexto",
           "texto": "holamundo AreaTexto"
+        },
+        {
+          "name": "mi form collapsable",
+          "elementoTipo": "collapsable",
+          "texto": "holamundo collapsable",
+          "value": [
+            {
+              "name": "campo1Colapsable",
+              "elementoTipo": "campoBasico",
+              "texto": "holamundo campoBasico collapsable"
+            },
+            {
+              "name": "area1Collapsable",
+              "elementoTipo": "areaTexto",
+              "texto": "holamundo AreaTexto collapsable"
+            }
+          ]
         }
       ]
     }`;
-    let modeloRender = JSON.parse(camposJson);
+    const modeloRender = JSON.parse(camposJson);
     console.log(modeloRender);
     modeloRender.elementosFormulario.forEach((element: any) => {
       console.log(element);
@@ -52,36 +70,59 @@ export class FormularioComponent implements OnInit {
   }
 
   render(camposJson: [] = []) {
-    // const elementos: ElementoFormularioComponent = new ElementoFormularioComponent();
-    // this.elementosFormulario = elementos.render();
     camposJson.forEach(elemento => {
-      let tipoElemento: any = this.getObjectComponent(elemento['elementoTipo']);
-      let elementoComponente: ElementoFormularioModel<string> = new ElementoFormularioModel<string>();
-      let dataElementoComponente: DataElementoFormularioModel<string> = new DataElementoFormularioModel<string>({ texto: elemento['texto'], name: elemento['name'] });
+      const tipoElemento: any = this.getObjectComponent(elemento['elementoTipo']);
+      let elementoFormulario: ElementoFormularioModel<any>;
+      let dataElementoFormulario: DataElementoFormularioModel<any>;
+      if (elemento['elementoTipo'] === "collapsable") {
+        let camposCollapsable: any[] = elemento["value"];
+        dataElementoFormulario = new DataElementoFormularioModel<DataElementoFormularioModel<string>[]>(
+          {
+            texto: elemento['texto'],
+            name: elemento['name'],
+            value: [],
+            tipoElemento: elemento['elementoTipo'],
+          }
+        );
 
-      elementoComponente
+        camposCollapsable.forEach(campoCollapsabe => {
+          let tipoElementoCollapsable: any = this.getObjectComponent(campoCollapsabe['elementoTipo']);
+          let dataElementoCollapsable = new DataElementoFormularioModel<string>(
+            {
+              texto: campoCollapsabe['texto'],
+              name: campoCollapsabe['name'],
+              tipoElemento: campoCollapsabe['elementoTipo'],
+            }
+          );
+          let elementoCollapsable = new ElementoFormularioModel<string>();
+          elementoCollapsable
+            .buildWithComponent(tipoElementoCollapsable)
+            .buildWithInputs(dataElementoCollapsable);
+          dataElementoFormulario.value.push(elementoCollapsable);
+        });
+        elementoFormulario = new ElementoFormularioModel<DataElementoFormularioModel<string>[]>();
+        elementoFormulario
+          .buildWithComponent(elementoFormulario)
+          .buildWithInputs(dataElementoFormulario);
+      } else {
+        elementoFormulario = new ElementoFormularioModel<string>();
+        dataElementoFormulario = new DataElementoFormularioModel<string>(
+          {
+            texto: elemento['texto'],
+            name: elemento['name'],
+            tipoElemento: elemento['elementoTipo'],
+            obligatorio: true
+          });
+      }
+      elementoFormulario
         .buildWithComponent(tipoElemento)
-        .buildWithInputs(dataElementoComponente);
-      this.elementosFormulario.push(elementoComponente);
+        .buildWithInputs(dataElementoFormulario);
+      this.elementosFormulario.push(elementoFormulario);
 
     });
     this.form = this.formGroupfactory.toFormGroup(this.elementosFormulario);
     this.formData = JSON.stringify(this.form.value);
-    /*const area1: any = {
-      component: AreaTextoComponent,
-      inputs: {
-        texto: 'area 1 de texto dinámico'
-      }
-    };
-    const campo1: ElementoFormularioModel<string> = new ElementoFormularioModel<string>();
-    campo1.buildWithComponent(CampoBasicoComponent)
-      .buildWithInputs(
-        new DataElementoFormularioModel<string>()
-          .buildWithTexto('campobasico 1 desde formulario')
-          .buildWithName('campo1')
-      );
-    this.elementosFormulario.push(area1);
-    this.elementosFormulario.push(campo1);*/
+
   }
 
   getObjectComponent(componentName: string): any {
@@ -90,6 +131,8 @@ export class FormularioComponent implements OnInit {
         return CampoBasicoComponent;
       case 'areaTexto':
         return AreaTextoComponent;
+      case 'collapsable':
+        return CollapsableComponent;
       default:
         break;
     }

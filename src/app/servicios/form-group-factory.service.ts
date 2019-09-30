@@ -12,10 +12,30 @@ export class FormGroupFactoryService {
   toFormGroup(campos: ElementoFormularioModel<any>[]) {
     let fieldControl: any = {};
     campos.forEach(campo => {
-      fieldControl[campo.inputs.name] = campo.inputs.obligatorio
-        ? new FormControl(campo.inputs.value || '', Validators.required)
-        : new FormControl(campo.inputs.value || '');
+      if (campo.inputs.tipoElemento === 'collapsable') {
+        let camposAnidados = this.toFormGroupAnidado(campo.inputs.value);
+        fieldControl = { ...fieldControl, ...camposAnidados };
+      } else {
+        fieldControl[campo.inputs.name] = campo.inputs.obligatorio
+          ? new FormControl(campo.inputs.value || '', Validators.required)
+          : new FormControl(campo.inputs.value || '');
+      }
+
     });
     return new FormGroup(fieldControl);
+  }
+  private toFormGroupAnidado(camposAnidados: ElementoFormularioModel<any>[]) {
+    let fieldControlAnidado: any = {};
+    camposAnidados.forEach(campoAnidado => {
+      if (campoAnidado.inputs.tipoElemento === 'collapsabe') {
+        let subCamposAnidados=this.toFormGroupAnidado(campoAnidado.inputs.value);
+        fieldControlAnidado = { ...fieldControlAnidado, ...subCamposAnidados };
+      } else {
+        fieldControlAnidado[campoAnidado.inputs.name] = campoAnidado.inputs.obligatorio
+          ? new FormControl(campoAnidado.inputs.value || '', Validators.required)
+          : new FormControl(campoAnidado.inputs.value || '');
+      }
+    });
+    return fieldControlAnidado;
   }
 }

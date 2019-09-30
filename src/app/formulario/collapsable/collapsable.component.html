@@ -1,0 +1,19 @@
+<mat-accordion>
+
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Titulo collapsable
+      </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        Descripcion del collapsable
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>ELEMENTOS QUE COMPONEN EL CUERPO DEL COLLAPSABLE</p>
+    <div *ngFor="let elemento of value; let i=index">
+      <kc-dynamic [componentData]="elemento" [formulario]="form"></kc-dynamic>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
