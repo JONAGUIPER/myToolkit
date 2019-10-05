@@ -1,32 +1,34 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
-export class DataElementoFormularioModel<T> {
-    value: T;
+export class DataElementoFormularioModel {
+    value: any;
     name: string;
     texto: string;
     tipoElemento: string;
     obligatorio: boolean;
+    elementosGrupo?: any[];
 
     etiquetaAyuda: string;
     saltoLinea: boolean;
     enLinea: boolean;
-    valorPorDefecto: T;
+    valorPorDefecto: any;
     habilitado: boolean;
     validaciones: any;
     accionesCondicionales: any;
     formato: any;
 
     constructor(options: {
-        value?: T,
+        value?: any,
         name?: string,
         texto?: string,
         tipoElemento?: string,
         obligatorio?: boolean,
+        elementosGrupo?: any[],
 
         etiquetaAyuda?: string,
         saltoLinea?: boolean,
         enLinea?: boolean,
-        valorPorDefecto?: T,
+        valorPorDefecto?: any,
         habilitado?: boolean,
         // TODO: crear los modelos correspondientes
         validaciones?: any,
@@ -39,6 +41,7 @@ export class DataElementoFormularioModel<T> {
         this.texto = options.texto || '';
         this.tipoElemento = options.tipoElemento || '';
         this.obligatorio = !!options.obligatorio;
+        this.elementosGrupo = options.elementosGrupo;
 
         this.etiquetaAyuda = options.etiquetaAyuda || '';
         this.saltoLinea = options.saltoLinea || false;
@@ -49,6 +52,7 @@ export class DataElementoFormularioModel<T> {
         this.validaciones = options.validaciones || null;
         this.accionesCondicionales = options.accionesCondicionales || null;
         this.formato = options.formato || '';
+
     }
 
 

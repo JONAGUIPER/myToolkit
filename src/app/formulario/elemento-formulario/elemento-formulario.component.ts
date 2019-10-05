@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './elemento-formulario.component.html',
   styleUrls: ['./elemento-formulario.component.css']
 })
-export class ElementoFormularioComponent extends DataElementoFormularioModel<string> implements OnInit {
+export class ElementoFormularioComponent extends DataElementoFormularioModel implements OnInit {
 
   form: FormGroup;
   elementosFormulario: Array<ElementoFormularioComponent> = new Array<ElementoFormularioComponent>();
@@ -27,6 +27,7 @@ export class ElementoFormularioComponent extends DataElementoFormularioModel<str
     this.texto = injector.get<string>('texto' as any);
     this.name = injector.get<string>('name' as any);
     this.value = injector.get<any>('value' as any);
+    this.elementosGrupo = injector.get<any[]>('elementosGrupo' as any);
     this.form = injector.get<FormGroup>('formulario' as any);
   }
 }

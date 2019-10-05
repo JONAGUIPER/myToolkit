@@ -9,11 +9,11 @@ export class FormGroupFactoryService {
 
   constructor() { }
 
-  toFormGroup(campos: ElementoFormularioModel<any>[]) {
+  toFormGroup(campos: ElementoFormularioModel[]) {
     let fieldControl: any = {};
     campos.forEach(campo => {
       if (campo.inputs.tipoElemento === 'collapsable') {
-        let camposAnidados = this.toFormGroupAnidado(campo.inputs.value);
+        let camposAnidados = this.toFormGroupAnidado(campo.inputs.elementosGrupo);
         fieldControl = { ...fieldControl, ...camposAnidados };
       } else {
         fieldControl[campo.inputs.name] = campo.inputs.obligatorio
@@ -24,11 +24,11 @@ export class FormGroupFactoryService {
     });
     return new FormGroup(fieldControl);
   }
-  private toFormGroupAnidado(camposAnidados: ElementoFormularioModel<any>[]) {
+  private toFormGroupAnidado(camposAnidados: ElementoFormularioModel[]) {
     let fieldControlAnidado: any = {};
     camposAnidados.forEach(campoAnidado => {
       if (campoAnidado.inputs.tipoElemento === 'collapsabe') {
-        let subCamposAnidados=this.toFormGroupAnidado(campoAnidado.inputs.value);
+        let subCamposAnidados=this.toFormGroupAnidado(campoAnidado.inputs.elementosGrupo);
         fieldControlAnidado = { ...fieldControlAnidado, ...subCamposAnidados };
       } else {
         fieldControlAnidado[campoAnidado.inputs.name] = campoAnidado.inputs.obligatorio
