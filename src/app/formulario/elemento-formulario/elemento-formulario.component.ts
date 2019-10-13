@@ -22,12 +22,14 @@ export class ElementoFormularioComponent extends DataElementoFormularioModel imp
   }
   get isValid() { return this.form.controls[this.name].valid; }
   get isDirty() { return this.form.controls[this.name].dirty; }
+  errores() { return this.form.controls[this.name].errors; }
 
   setInputs(injector: Injector) {
+    this.form = injector.get<FormGroup>('formulario' as any);
     this.texto = injector.get<string>('texto' as any);
     this.name = injector.get<string>('name' as any);
     this.value = injector.get<any>('value' as any);
     this.elementosGrupo = injector.get<any[]>('elementosGrupo' as any);
-    this.form = injector.get<FormGroup>('formulario' as any);
   }
+  
 }

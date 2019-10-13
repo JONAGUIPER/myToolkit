@@ -2,12 +2,16 @@ import { DataElementoFormularioModel } from './data-elemento-formulario-model';
 import { CampoBasicoComponent } from '../formulario/campo-basico/campo-basico.component';
 import { AreaTextoComponent } from '../formulario/areatexto/area-texto.component';
 import { CollapsableComponent } from '../formulario/collapsable/collapsable.component';
+import { Validacion } from './validacion';
+import { ValidadoresService } from '../servicios/validadores.service';
 // TODO: se puede cambiar para que T sea el tipo de fields
 // (campobasico,AreaTexto, etc) en funcion a esto se cambie el tipo de value
 // a string, array, etc
 export class ElementoFormularioModel {
 
-    constructor() {
+    constructor(
+        private creadorValidaciones: ValidadoresService
+    ) {
         // return this.inner;
     }
 
@@ -30,10 +34,11 @@ export class ElementoFormularioModel {
         return this;
     }
     build(options: {
+        // obligatorios
         tipoElemento?: string,
         name?: string,
 
-        
+
         texto?: string,
         value?: any,
         obligatorio?: boolean,
@@ -45,18 +50,19 @@ export class ElementoFormularioModel {
         valorPorDefecto?: any,
         habilitado?: boolean,
         // TODO: crear los modelos correspondientes
-        validaciones?: any,
+        validaciones?: Validacion[],
         accionesCondicionales?: any,
         formato?: any
 
     } = {}) {
-        //obligatorios
+        // obligatorios
         this.component = this.getObjectComponent(options.tipoElemento);
+        this.inputs = new DataElementoFormularioModel();
         this.inputs.name = options.name || '';
 
         this.inputs.value = options.value;
         this.inputs.texto = options.texto || '';
-        
+
         this.inputs.obligatorio = !!options.obligatorio;
         this.inputs.elementosGrupo = options.elementosGrupo;
 
@@ -66,11 +72,11 @@ export class ElementoFormularioModel {
         this.inputs.valorPorDefecto = options.valorPorDefecto || null;
         this.inputs.habilitado = options.habilitado || true;
         // TODO: crear los modelos correspondientes
-        this.inputs.validaciones = options.validaciones || null;
+        this.inputs.validaciones =  this.creadorValidaciones.crearListaValidacionesFromJson(options.validaciones);
         this.inputs.accionesCondicionales = options.accionesCondicionales || null;
         this.inputs.formato = options.formato || '';
 
-    };
+    }
 
     private getObjectComponent(componentName: string): any {
         switch (componentName) {

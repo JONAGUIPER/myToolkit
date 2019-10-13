@@ -14,7 +14,7 @@ import { CollapsableComponent } from '../collapsable/collapsable.component';
   styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent implements OnInit {
-  //@Output() onSubmit = new EventEmitter();
+  // @Output() onSubmit = new EventEmitter();
   elementosFormulario: Array<any> = new Array<any>();
   form: FormGroup;
   formData = '';
@@ -73,11 +73,11 @@ export class FormularioComponent implements OnInit {
   render(camposJson: [] = []) {
     camposJson.forEach(elementoFormularioJSON => {
       let elementoFormulario: ElementoFormularioModel;
-      if (elementoFormularioJSON['tipoElemento'] === "collapsable") {
+      if (elementoFormularioJSON['tipoElemento'] === 'collapsable') {
         elementoFormulario = new ElementoFormularioModel();
         elementoFormulario.buildInputs(elementoFormularioJSON);
-        elementoFormulario.inputs.elementosGrupo = [];//elimino estos valores porque los creare inicializados
-        let elementosGrupo: any[] = elementoFormularioJSON["elementosGrupo"];
+        elementoFormulario.inputs.elementosGrupo = []; // elimino estos valores porque los creare inicializados
+        let elementosGrupo: any[] = elementoFormularioJSON['elementosGrupo'];
         elementosGrupo.forEach(campoCollapsabe => {
           let elementoCollapsable = new ElementoFormularioModel().buildInputs(campoCollapsabe);
           elementoFormulario.inputs.elementosGrupo.push(elementoCollapsable);

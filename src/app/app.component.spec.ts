@@ -1,16 +1,22 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { MatToolbarModule } from '@angular/material';
+import { FormularioComponent } from './formulario/formulario/formulario.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MatToolbarModule,
+
       ],
       declarations: [
-        AppComponent
-      ],
+        AppComponent,
+        FormularioComponent
+      ],schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -30,6 +36,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('MyToolkit app is running!');
+    expect(compiled.querySelector('mat-toolbar span').textContent).toContain('My Toolkit');
   });
 });

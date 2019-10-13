@@ -8,14 +8,17 @@ import { Validacion } from '../modelos/validacion';
 export class ValidadoresService {
 
   constructor() { }
-
+  crearListaValidacionesFromJson(listaJson: any): Validacion[] {
+    let listaValidaciones: Validacion[] = [];
+    return listaValidaciones;
+  }
 
   crearValidaciones(listaValidaciones: Validacion[] = []): ValidatorFn[] {
     let validacionesResultado: ValidatorFn[] = [];
     for (const validacion of listaValidaciones) {
       switch (validacion.tipoValidacion) {
         case 'required':
-          validacionesResultado.push(Validators.required);
+          validacionesResultado.push(this.kcRequiredValidator);
           break;
         case 'email':
           validacionesResultado.push(Validators.email);
@@ -25,5 +28,13 @@ export class ValidadoresService {
       }
     }
     return validacionesResultado;
+  }
+
+  kcRequiredValidator(): ValidatorFn {
+    const funcionValidacion = (control: AbstractControl): { [key: string]: any } | null => {
+      const obligatorio = Validators.required(control);
+      return obligatorio ? { 'kcRequiredValidator': { value: control.value, mensaje: 'error de mi campo requerido' } } : null;
+    };
+    return funcionValidacion;
   }
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { ElementoFormularioComponent } from '../elemento-formulario/elemento-formulario.component';
-import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
-import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -10,7 +8,6 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./campo-basico.component.css']
 })
 export class CampoBasicoComponent extends ElementoFormularioComponent implements OnInit {
-
 
   constructor(private injector: Injector) {
     super();

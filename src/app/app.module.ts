@@ -8,25 +8,30 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 // mis componentes
-import { CampoBasicoComponent } from './formulario/campo-basico/campo-basico.component';
+
 import { ElementoFormularioComponent } from './formulario/elemento-formulario/elemento-formulario.component';
 import { FormularioComponent } from './formulario/formulario/formulario.component';
 import { DynamicComponent } from './formulario/dynamic/dynamic.component';
+import { CampoBasicoComponent } from './formulario/campo-basico/campo-basico.component';
 import { AreaTextoComponent } from './formulario/areatexto/area-texto.component';
 import { CollapsableComponent } from './formulario/collapsable/collapsable.component';
 
 //MATERIAL
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatExpansionModule } from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
+import {
+  MatInputModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatToolbarModule,
+  MatExpansionModule,
+  MatIconModule
+} from '@angular/material';
+
 
 
 const ENTRYCOMPONENTS = [
-  AreaTextoComponent,
+  
   CampoBasicoComponent,
+  AreaTextoComponent,
   CollapsableComponent
 ];
 
@@ -45,9 +50,7 @@ const MATERIALMODULES = [
     ElementoFormularioComponent,
     FormularioComponent,
     DynamicComponent,
-    //ServiceWorkerModule,
     ENTRYCOMPONENTS,
-    CollapsableComponent
 
   ],
   imports: [

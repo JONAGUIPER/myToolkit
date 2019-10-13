@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ElementoFormularioModel } from '../modelos/elemento-formulario-model';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { ValidadoresService } from './validadores.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormGroupFactoryService {
 
-  constructor() { }
+  constructor( private validadorService:ValidadoresService) { }
 
   toFormGroup(campos: ElementoFormularioModel[]) {
     let fieldControl: any = {};
@@ -17,10 +18,9 @@ export class FormGroupFactoryService {
         fieldControl = { ...fieldControl, ...camposAnidados };
       } else {
         fieldControl[campo.inputs.name] = campo.inputs.obligatorio
-          ? new FormControl(campo.inputs.value || '', Validators.required)
+          ? new FormControl(campo.inputs.value || '', this.validadorService.crearValidaciones(campo.inputs.validaciones))
           : new FormControl(campo.inputs.value || '');
       }
-
     });
     return new FormGroup(fieldControl);
   }
@@ -32,7 +32,7 @@ export class FormGroupFactoryService {
         fieldControlAnidado = { ...fieldControlAnidado, ...subCamposAnidados };
       } else {
         fieldControlAnidado[campoAnidado.inputs.name] = campoAnidado.inputs.obligatorio
-          ? new FormControl(campoAnidado.inputs.value || '', Validators.required)
+          ? new FormControl(campoAnidado.inputs.value || '', this.validadorService.crearValidaciones(campoAnidado.inputs.validaciones))
           : new FormControl(campoAnidado.inputs.value || '');
       }
     });
