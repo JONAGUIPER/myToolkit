@@ -25,6 +25,7 @@ import {
   MatExpansionModule,
   MatIconModule
 } from '@angular/material';
+import { ValidadoresService } from './servicios/validadores.service';
 
 
 
@@ -61,7 +62,7 @@ const MATERIALMODULES = [
     MATERIALMODULES,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [ValidadoresService],
   bootstrap: [AppComponent],
   entryComponents: [ENTRYCOMPONENTS]
 })

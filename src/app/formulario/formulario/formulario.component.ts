@@ -7,6 +7,7 @@ import { ElementoFormularioModel } from 'src/app/modelos/elemento-formulario-mod
 import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
 import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
 import { CollapsableComponent } from '../collapsable/collapsable.component';
+import { ValidadoresService } from 'src/app/servicios/validadores.service';
 
 @Component({
   selector: 'kc-formulario',
@@ -26,7 +27,8 @@ export class FormularioComponent implements OnInit {
   };*/
 
 
-  constructor(private formGroupfactory: FormGroupFactoryService) { }
+  constructor(private formGroupfactory: FormGroupFactoryService,
+              private servicioValidaciones: ValidadoresService) { }
 
   ngOnInit() {
     const camposJson = `{
@@ -35,12 +37,18 @@ export class FormularioComponent implements OnInit {
           "name": "campo1",
           "tipoElemento": "campoBasico",
           "texto": "holamundo campobasico",
-          "obligatorio":true
+          "validaciones":[
+            {"tipoValidacion":"required"},
+            {"tipoValidacion":"email"}
+          ]
         },
         {
           "name": "area1",
           "tipoElemento": "areaTexto",
-          "texto": "holamundo AreaTexto"
+          "texto": "holamundo AreaTexto",
+          "validaciones":[
+            {"tipoValidacion":"email"}
+          ]
         },
         {
           "name": "mi form collapsable",
@@ -71,19 +79,20 @@ export class FormularioComponent implements OnInit {
   }
 
   render(camposJson: [] = []) {
+    //const servicioValidaciones = new ValidadoresService();
     camposJson.forEach(elementoFormularioJSON => {
       let elementoFormulario: ElementoFormularioModel;
       if (elementoFormularioJSON['tipoElemento'] === 'collapsable') {
-        elementoFormulario = new ElementoFormularioModel();
+        elementoFormulario = new ElementoFormularioModel(this.servicioValidaciones);
         elementoFormulario.buildInputs(elementoFormularioJSON);
         elementoFormulario.inputs.elementosGrupo = []; // elimino estos valores porque los creare inicializados
         let elementosGrupo: any[] = elementoFormularioJSON['elementosGrupo'];
         elementosGrupo.forEach(campoCollapsabe => {
-          let elementoCollapsable = new ElementoFormularioModel().buildInputs(campoCollapsabe);
+          let elementoCollapsable = new ElementoFormularioModel(this.servicioValidaciones).buildInputs(campoCollapsabe);
           elementoFormulario.inputs.elementosGrupo.push(elementoCollapsable);
         });
       } else {
-        elementoFormulario = new ElementoFormularioModel().buildInputs(elementoFormularioJSON);
+        elementoFormulario = new ElementoFormularioModel(this.servicioValidaciones).buildInputs(elementoFormularioJSON);
       }
       this.elementosFormulario.push(elementoFormulario);
     });

@@ -8,7 +8,7 @@ import { ValidadoresService } from './validadores.service';
 })
 export class FormGroupFactoryService {
 
-  constructor( private validadorService:ValidadoresService) { }
+  constructor( private validadorService: ValidadoresService) { }
 
   toFormGroup(campos: ElementoFormularioModel[]) {
     let fieldControl: any = {};
@@ -17,7 +17,7 @@ export class FormGroupFactoryService {
         let camposAnidados = this.toFormGroupAnidado(campo.inputs.elementosGrupo);
         fieldControl = { ...fieldControl, ...camposAnidados };
       } else {
-        fieldControl[campo.inputs.name] = campo.inputs.obligatorio
+        fieldControl[campo.inputs.name] = campo.inputs.validaciones
           ? new FormControl(campo.inputs.value || '', this.validadorService.crearValidaciones(campo.inputs.validaciones))
           : new FormControl(campo.inputs.value || '');
       }
@@ -31,7 +31,7 @@ export class FormGroupFactoryService {
         let subCamposAnidados=this.toFormGroupAnidado(campoAnidado.inputs.elementosGrupo);
         fieldControlAnidado = { ...fieldControlAnidado, ...subCamposAnidados };
       } else {
-        fieldControlAnidado[campoAnidado.inputs.name] = campoAnidado.inputs.obligatorio
+        fieldControlAnidado[campoAnidado.inputs.name] = campoAnidado.inputs.validaciones
           ? new FormControl(campoAnidado.inputs.value || '', this.validadorService.crearValidaciones(campoAnidado.inputs.validaciones))
           : new FormControl(campoAnidado.inputs.value || '');
       }

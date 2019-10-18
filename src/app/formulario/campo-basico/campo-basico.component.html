@@ -4,6 +4,6 @@
   <!-- <mat-card>Simple card</mat-card> -->
   <mat-form-field>
     <input matInput placeholder="{{texto}}" [formControlName]="name" [id]="name">
-    <mat-error *ngIf="!isValid">{{errores()|json}}</mat-error>
+    <mat-error *ngIf="!isValid">{{errores}}</mat-error>
   </mat-form-field>
 </div>

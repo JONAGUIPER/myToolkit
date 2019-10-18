@@ -4,15 +4,13 @@ import { AreaTextoComponent } from '../formulario/areatexto/area-texto.component
 import { CollapsableComponent } from '../formulario/collapsable/collapsable.component';
 import { Validacion } from './validacion';
 import { ValidadoresService } from '../servicios/validadores.service';
-// TODO: se puede cambiar para que T sea el tipo de fields
-// (campobasico,AreaTexto, etc) en funcion a esto se cambie el tipo de value
-// a string, array, etc
+
 export class ElementoFormularioModel {
 
     constructor(
         private creadorValidaciones: ValidadoresService
     ) {
-        // return this.inner;
+        
     }
 
     // inner: ElementoFormularioModel;

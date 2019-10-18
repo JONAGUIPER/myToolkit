@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'kc-elemento-formulario',
@@ -22,7 +22,14 @@ export class ElementoFormularioComponent extends DataElementoFormularioModel imp
   }
   get isValid() { return this.form.controls[this.name].valid; }
   get isDirty() { return this.form.controls[this.name].dirty; }
-  errores() { return this.form.controls[this.name].errors; }
+  get errores() {
+    const errores: ValidationErrors = this.form.controls[this.name].errors;
+    let erroresString = '';
+    Object.keys(errores).forEach(keyError => {
+      erroresString += /*' keyError: ' + keyError + ', err value: ' + */errores[keyError].mensaje + '\n';
+    });
+    return erroresString;
+  }
 
   setInputs(injector: Injector) {
     this.form = injector.get<FormGroup>('formulario' as any);
@@ -31,5 +38,5 @@ export class ElementoFormularioComponent extends DataElementoFormularioModel imp
     this.value = injector.get<any>('value' as any);
     this.elementosGrupo = injector.get<any[]>('elementosGrupo' as any);
   }
-  
+
 }

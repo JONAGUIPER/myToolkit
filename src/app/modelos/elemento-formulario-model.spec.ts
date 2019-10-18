@@ -1,5 +1,6 @@
 import { ElementoFormularioModel } from './elemento-formulario-model';
 import { CampoBasicoComponent } from '../formulario/campo-basico/campo-basico.component';
+import { ValidadoresService } from '../servicios/validadores.service';
 
 describe('ElementoFormularioModel', () => {
   'use strict';
@@ -41,12 +42,11 @@ describe('ElementoFormularioModel', () => {
   });
 
   it('should create an instance', () => {
-    expect(new ElementoFormularioModel()).toBeTruthy();
+    expect(new ElementoFormularioModel(new ValidadoresService())).toBeTruthy();
   });
 
   it('contruye un campo basico', () => {
-    debugger;
-    let campoBasico = new ElementoFormularioModel();
+    let campoBasico = new ElementoFormularioModel(new ValidadoresService());
     campoBasico.build(modeloRender.elementosFormulario[0]);
     expect(campoBasico.component).toBe(CampoBasicoComponent);
     expect(campoBasico.inputs).toBeTruthy();

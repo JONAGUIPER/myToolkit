@@ -6,6 +6,7 @@ import { MatFormField, MatError } from '@angular/material';
 import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppModule } from 'src/app/app.module';
+import { ValidadoresService } from 'src/app/servicios/validadores.service';
 
 class MockFormGroupFactoryService extends FormGroupFactoryService {
   toFormGroup() {
@@ -20,6 +21,7 @@ describe('FormularioComponent', () => {
   let fixture: ComponentFixture<FormularioComponent>;
   let formGroupFactoryServiceStub: FormGroupFactoryService;
   let testFormGroupFactory: FormGroupFactoryService;
+  let testValidacionesService: ValidadoresService;
   let mockFormGroupFactory: FormGroupFactoryService;
   let mockComponent: FormularioComponent;
 
@@ -61,17 +63,18 @@ describe('FormularioComponent', () => {
   });
 
   beforeEach(() => {
-    testFormGroupFactory = new FormGroupFactoryService();
-    component = new FormularioComponent(testFormGroupFactory);
-    mockFormGroupFactory = new MockFormGroupFactoryService();
-    mockComponent = new FormularioComponent(mockFormGroupFactory);
-/*
-    TestBed.configureTestingModule({
-      declarations: [FormularioComponent,
-        DynamicComponent,
-        MatFormField, MatError],
-      providers: [FormGroupFactoryService]
-    });*/
+    const servicioValidaciones = new ValidadoresService();
+    testFormGroupFactory = new FormGroupFactoryService(servicioValidaciones);
+    component = new FormularioComponent(testFormGroupFactory, testValidacionesService);
+    mockFormGroupFactory = new MockFormGroupFactoryService(servicioValidaciones);
+    mockComponent = new FormularioComponent(mockFormGroupFactory, testValidacionesService);
+    /*
+        TestBed.configureTestingModule({
+          declarations: [FormularioComponent,
+            DynamicComponent,
+            MatFormField, MatError],
+          providers: [FormGroupFactoryService]
+        });*/
     /*TestBed.overrideComponent(
       FormularioComponent,
       {
