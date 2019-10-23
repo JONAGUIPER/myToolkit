@@ -10,7 +10,7 @@ export class ElementoFormularioModel {
     constructor(
         private creadorValidaciones: ValidadoresService
     ) {
-        
+
     }
 
     // inner: ElementoFormularioModel;
@@ -55,7 +55,7 @@ export class ElementoFormularioModel {
     } = {}) {
         // obligatorios
         this.component = this.getObjectComponent(options.tipoElemento);
-        this.inputs = new DataElementoFormularioModel();
+        this.inputs  = new DataElementoFormularioModel();
         this.inputs.name = options.name || '';
 
         this.inputs.value = options.value;

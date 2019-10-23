@@ -20,7 +20,7 @@ describe('ValidadoresService', () => {
 
   it('podria ser Validator.email', () => {
     let options = { tipoValidacion: 'email', parametros: ['param1'] };
-    const validacion = new Validacion(options);
+    const validacion: Validacion = options;
     let listaValidaciones: Validacion[] = [];
     listaValidaciones.push(validacion);
     const service: ValidadoresService = TestBed.get(ValidadoresService);
@@ -31,8 +31,8 @@ describe('ValidadoresService', () => {
 
   it('podria crear lista 2 elementos', () => {
     let listaValidaciones: Validacion[] = [];
-    const validacion = new Validacion({ tipoValidacion: 'required', parametros: ['param1'] });
-    const validacion2 = new Validacion({ tipoValidacion: 'email', parametros: ['param2'] });
+    const validacion: Validacion = { tipoValidacion: 'required', parametros: ['param1'] };
+    const validacion2: Validacion = { tipoValidacion: 'email', parametros: ['param2'] };
     listaValidaciones.push(validacion);
     listaValidaciones.push(validacion2);
     const service: ValidadoresService = TestBed.get(ValidadoresService);

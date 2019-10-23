@@ -6,7 +6,7 @@ export class DataElementoFormularioModel {
     texto: string;
     tipoElemento: string;
     obligatorio: boolean;
-    elementosGrupo?: any[];
+    elementosGrupo: any[];
 
     etiquetaAyuda: string;
     saltoLinea: boolean;

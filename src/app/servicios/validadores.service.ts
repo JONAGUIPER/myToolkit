@@ -12,7 +12,7 @@ export class ValidadoresService {
   crearListaValidacionesFromJson(listaJson: any): Validacion[] {
     let listaValidaciones: Validacion[] = [];
     listaJson.validaciones.forEach(element => {
-      listaValidaciones.push(new Validacion(element));
+      listaValidaciones.push(element);
     });
     return listaValidaciones;
   }
