@@ -7,7 +7,7 @@ import { FormularioComponent } from '../formulario/formulario/formulario.compone
 import { CondicionesEnum } from '../enumeradores/condiciones-enum.enum';
 import { Condiciones } from '../modelos/condiciones';
 
-describe('CondicionalesService', () => {
+fdescribe('CondicionalesService', () => {
   let service: CondicionalesService;
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -20,7 +20,6 @@ describe('CondicionalesService', () => {
   });
 
   it('se puede validar una condicion entre valores fijos ', () => {
-    // const fieldEvaluado = new FormControl('6');
     const fieldEvaluado = new FormControl('6');
     let condicion: Condicion = { valorFijo: '5', condicion: 'mayor' };
     expect(service.evaluarCondicionSimple(fieldEvaluado, condicion)).toBeTruthy();

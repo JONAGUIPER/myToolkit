@@ -7,11 +7,10 @@ import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.se
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppModule } from 'src/app/app.module';
 import { ValidadoresService } from 'src/app/servicios/validadores.service';
-import { CondicionalesService } from 'src/app/servicios/condicionales.service';
 
 class MockFormGroupFactoryService extends FormGroupFactoryService {
   toFormGroup() {
-    const fieldControl: any = {};
+    let fieldControl: any = {};
     fieldControl['campo1'] = new FormControl('', Validators.required);
     return new FormGroup(fieldControl);
   }
@@ -27,7 +26,6 @@ describe('FormularioComponent', () => {
   let mockComponent: FormularioComponent;
 
   let modeloRender: any;
-  let testCodicionesService: CondicionalesService;
   beforeAll(function () {
     const camposJson = `{
       "elementosFormulario": [
@@ -65,8 +63,7 @@ describe('FormularioComponent', () => {
   });
 
   beforeEach(() => {
-    testCodicionesService = new CondicionalesService();
-    const servicioValidaciones = new ValidadoresService(testCodicionesService);
+    const servicioValidaciones = new ValidadoresService();
     testFormGroupFactory = new FormGroupFactoryService(servicioValidaciones);
     component = new FormularioComponent(testFormGroupFactory, testValidacionesService);
     mockFormGroupFactory = new MockFormGroupFactoryService(servicioValidaciones);

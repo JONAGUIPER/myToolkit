@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Condicion } from '../modelos/condicion';
 import { CondicionesEnum } from '../enumeradores/condiciones-enum.enum';
 import { Condiciones } from '../modelos/condiciones';
@@ -14,7 +14,7 @@ export class CondicionalesService {
 
   }
 
-  evaluarCondicionSimple(fieldEvaluado: AbstractControl, condicion: Condicion): boolean {
+  evaluarCondicionSimple(fieldEvaluado: FormControl, condicion: Condicion): boolean {
     let valorEvaluador = condicion.valorFijo;
     const valorEvaluado = fieldEvaluado.value;
     if (condicion.nombreCampo) {
@@ -40,21 +40,17 @@ export class CondicionalesService {
     }
   }
 
-  evaluar(fieldEvaluado: AbstractControl, condiciones: Condiciones): boolean {
+  evaluar(fieldEvaluado: FormControl, condiciones: Condiciones): boolean {
     let respuesta: boolean;
-    if (!condiciones) {
-      return true;
-    } else if (condiciones.subCondiciones) {
+    if (condiciones.subCondiciones) {
       respuesta = this.evaluarSubCondiciones(fieldEvaluado, condiciones);
-    } else if (condiciones.condiciones) {
-      respuesta = this.evaluarCondicion(fieldEvaluado, condiciones);
     } else {
-      return true;
+      respuesta = this.evaluarCondicion(fieldEvaluado, condiciones);
     }
     return respuesta;
   }
 
-  private evaluarSubCondiciones(fieldEvaluado: AbstractControl, condiciones: Condiciones) {
+  private evaluarSubCondiciones(fieldEvaluado: FormControl, condiciones: Condiciones) {
     let respuesta: boolean;
     condiciones.subCondiciones.forEach((itemCondiciones, index) => {
       if (index === 0) {
@@ -65,7 +61,7 @@ export class CondicionalesService {
     return respuesta;
   }
 
-  private evaluarCondicion(fieldEvaluado: AbstractControl, condiciones: Condiciones) {
+  private evaluarCondicion(fieldEvaluado: FormControl, condiciones: Condiciones) {
     let respuesta: boolean;
     condiciones.condiciones.forEach((condicion, index) => {
       if (index === 0) {
