@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CampoBasicoComponent } from './campo-basico.component';
+import { CampoBasicoComponent } from './kc-campo-basico.component';
 
 describe('CampoBasicoComponent', () => {
   let component: CampoBasicoComponent;

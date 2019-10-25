@@ -6,9 +6,8 @@ import { Validacion } from '../modelos/validacion';
   providedIn: 'root'
 })
 export class ValidadoresService {
-  
-
   constructor() { }
+  
   crearListaValidacionesFromJson(listaJson: any): Validacion[] {
     let listaValidaciones: Validacion[] = [];
     listaJson.validaciones.forEach(element => {

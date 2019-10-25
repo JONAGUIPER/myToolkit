@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AreaTextoComponent } from './area-texto.component';
-import { ElementoFormularioComponent } from '../elemento-formulario/elemento-formulario.component';
+import { AreaTextoComponent } from './kc-area-texto.component';
+import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
 import { inject, Injector, ViewChild, Component, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MatFormField, MatFormFieldModule } from '@angular/material';

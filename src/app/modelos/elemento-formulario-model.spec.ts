@@ -1,5 +1,5 @@
 import { ElementoFormularioModel } from './elemento-formulario-model';
-import { CampoBasicoComponent } from '../formulario/campo-basico/campo-basico.component';
+import { CampoBasicoComponent } from '../formulario/elementos/kc-campo-basico/kc-campo-basico.component';
 import { ValidadoresService } from '../servicios/validadores.service';
 
 describe('ElementoFormularioModel', () => {

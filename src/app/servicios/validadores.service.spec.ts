@@ -37,7 +37,6 @@ describe('ValidadoresService', () => {
     listaValidaciones.push(validacion2);
     const service: ValidadoresService = TestBed.get(ValidadoresService);
     let listaValidatorFn = service.crearValidaciones(listaValidaciones);
-    debugger;
     expect(listaValidatorFn.length).toBeGreaterThan(1);
     expect(listaValidatorFn[0]).toBeTruthy();
     expect(listaValidatorFn[1]).toBeTruthy();

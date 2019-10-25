@@ -1,12 +1,12 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { AreaTextoComponent } from '../areatexto/area-texto.component';
-import { CampoBasicoComponent } from '../campo-basico/campo-basico.component';
+import { AreaTextoComponent } from '../elementos/kc-areatexto/kc-area-texto.component';
+import { CampoBasicoComponent } from '../elementos/kc-campo-basico/kc-campo-basico.component';
 import { ElementoFormularioModel } from 'src/app/modelos/elemento-formulario-model';
 import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
 import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
-import { CollapsableComponent } from '../collapsable/collapsable.component';
+import { CollapsableComponent } from '../elementos/kc-collapsable/kc-collapsable.component';
 import { ValidadoresService } from 'src/app/servicios/validadores.service';
 
 @Component({

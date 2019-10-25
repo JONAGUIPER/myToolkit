@@ -7,7 +7,7 @@ import { FormularioComponent } from '../formulario/formulario/formulario.compone
 import { CondicionesEnum } from '../enumeradores/condiciones-enum.enum';
 import { Condiciones } from '../modelos/condiciones';
 
-fdescribe('CondicionalesService', () => {
+describe('CondicionalesService', () => {
   let service: CondicionalesService;
   beforeEach(() => {
     TestBed.configureTestingModule({});

@@ -1,7 +1,7 @@
 import { DataElementoFormularioModel } from './data-elemento-formulario-model';
-import { CampoBasicoComponent } from '../formulario/campo-basico/campo-basico.component';
-import { AreaTextoComponent } from '../formulario/areatexto/area-texto.component';
-import { CollapsableComponent } from '../formulario/collapsable/collapsable.component';
+import { CampoBasicoComponent } from '../formulario/elementos/kc-campo-basico/kc-campo-basico.component';
+import { AreaTextoComponent } from '../formulario/elementos/kc-areatexto/kc-area-texto.component';
+import { CollapsableComponent } from '../formulario/elementos/kc-collapsable/kc-collapsable.component';
 import { Validacion } from './validacion';
 import { ValidadoresService } from '../servicios/validadores.service';
 
