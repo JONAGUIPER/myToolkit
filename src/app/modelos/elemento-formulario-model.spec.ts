@@ -1,10 +1,12 @@
 import { ElementoFormularioModel } from './elemento-formulario-model';
 import { CampoBasicoComponent } from '../formulario/campo-basico/campo-basico.component';
 import { ValidadoresService } from '../servicios/validadores.service';
+import { CondicionalesService } from '../servicios/condicionales.service';
 
 describe('ElementoFormularioModel', () => {
   'use strict';
   let modeloRender;
+  let testCodicionesService: CondicionalesService;
   beforeAll(function () {
     const camposJson = `{
       "elementosFormulario": [
@@ -40,13 +42,16 @@ describe('ElementoFormularioModel', () => {
     }`;
     modeloRender = JSON.parse(camposJson);
   });
+  beforeEach(function () {
+    testCodicionesService = new CondicionalesService();
+  });
 
   it('should create an instance', () => {
-    expect(new ElementoFormularioModel(new ValidadoresService())).toBeTruthy();
+    expect(new ElementoFormularioModel(new ValidadoresService(testCodicionesService))).toBeTruthy();
   });
 
   it('contruye un campo basico', () => {
-    let campoBasico = new ElementoFormularioModel(new ValidadoresService());
+    let campoBasico = new ElementoFormularioModel(new ValidadoresService(testCodicionesService));
     campoBasico.build(modeloRender.elementosFormulario[0]);
     expect(campoBasico.component).toBe(CampoBasicoComponent);
     expect(campoBasico.inputs).toBeTruthy();
