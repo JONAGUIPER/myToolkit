@@ -1,7 +1,7 @@
 import { DataElementoFormularioModel } from './data-elemento-formulario-model';
-import { CampoBasicoComponent } from '../formulario/campo-basico/campo-basico.component';
-import { AreaTextoComponent } from '../formulario/areatexto/area-texto.component';
-import { CollapsableComponent } from '../formulario/collapsable/collapsable.component';
+import { KcCampoBasicoComponent } from '../formulario/elementos/kc-campo-basico/kc-campo-basico.component';
+import { KcAreaTextoComponent } from '../formulario/elementos/kc-areatexto/kc-area-texto.component';
+import { KcCollapsableComponent } from '../formulario/elementos/kc-collapsable/kc-collapsable.component';
 import { Validacion } from './validacion';
 import { ValidadoresService } from '../servicios/validadores.service';
 
@@ -79,11 +79,11 @@ export class ElementoFormularioModel {
     private getObjectComponent(componentName: string): any {
         switch (componentName) {
             case 'campoBasico':
-                return CampoBasicoComponent;
+                return KcCampoBasicoComponent;
             case 'areaTexto':
-                return AreaTextoComponent;
+                return KcAreaTextoComponent;
             case 'collapsable':
-                return CollapsableComponent;
+                return KcCollapsableComponent;
             default:
                 break;
         }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CampoBasicoComponent } from './campo-basico.component';
+import { KcComboComponent } from './kc-combo.component';
 
-describe('CampoBasicoComponent', () => {
-  let component: CampoBasicoComponent;
-  let fixture: ComponentFixture<CampoBasicoComponent>;
+describe('KcComboComponent', () => {
+  let component: KcComboComponent;
+  let fixture: ComponentFixture<KcComboComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CampoBasicoComponent ]
+      declarations: [ KcComboComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CampoBasicoComponent);
+    fixture = TestBed.createComponent(KcComboComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
