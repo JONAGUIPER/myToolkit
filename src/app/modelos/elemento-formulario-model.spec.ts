@@ -1,5 +1,5 @@
 import { ElementoFormularioModel } from './elemento-formulario-model';
-import { CampoBasicoComponent } from '../formulario/elementos/kc-campo-basico/kc-campo-basico.component';
+import { KcCampoBasicoComponent } from '../formulario/elementos/kc-campo-basico/kc-campo-basico.component';
 import { ValidadoresService } from '../servicios/validadores.service';
 
 describe('ElementoFormularioModel', () => {
@@ -48,7 +48,7 @@ describe('ElementoFormularioModel', () => {
   it('contruye un campo basico', () => {
     let campoBasico = new ElementoFormularioModel(new ValidadoresService());
     campoBasico.build(modeloRender.elementosFormulario[0]);
-    expect(campoBasico.component).toBe(CampoBasicoComponent);
+    expect(campoBasico.component).toBe(KcCampoBasicoComponent);
     expect(campoBasico.inputs).toBeTruthy();
     expect(campoBasico.inputs.name).toEqual('campo1');
     expect(campoBasico.inputs.texto).toEqual('holamundo campobasico');

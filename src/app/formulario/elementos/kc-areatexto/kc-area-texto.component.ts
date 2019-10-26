@@ -6,7 +6,7 @@ import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-
   templateUrl: './kc-area-texto.component.html',
   styleUrls: ['./kc-area-texto.component.css']
 })
-export class AreaTextoComponent extends ElementoFormularioComponent implements OnInit {
+export class KcAreaTextoComponent extends ElementoFormularioComponent implements OnInit {
 
   constructor(private injector: Injector) {
     super();

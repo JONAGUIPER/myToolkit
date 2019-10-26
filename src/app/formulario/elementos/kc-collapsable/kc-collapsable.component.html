@@ -12,8 +12,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>ELEMENTOS QUE COMPONEN EL CUERPO DEL COLLAPSABLE</p>
-    <div *ngFor="let elemento of elementosGrupo; let i=index">
-      <kc-dynamic [componentData]="elemento" [formulario]="form"></kc-dynamic>
+    
+    
+    <div  *ngFor="let elemento of elementosGrupo; let i=index">
+      <kc-dynamic  [componentData]="elemento" [formulario]="form"></kc-dynamic>
     </div>
   </mat-expansion-panel>
 </mat-accordion>

@@ -6,7 +6,7 @@ import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-
   templateUrl: './kc-collapsable.component.html',
   styleUrls: ['./kc-collapsable.component.css']
 })
-export class CollapsableComponent extends ElementoFormularioComponent implements OnInit {
+export class KcCollapsableComponent extends ElementoFormularioComponent implements OnInit {
 
   panelOpenState: boolean;
   constructor(private injector: Injector) {

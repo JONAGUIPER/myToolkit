@@ -1,22 +1,34 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CampoBasicoComponent } from './kc-campo-basico.component';
+import { KcCampoBasicoComponent } from './kc-campo-basico.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material';
+import { Injector } from '@angular/core';
 
 describe('CampoBasicoComponent', () => {
-  let component: CampoBasicoComponent;
-  let fixture: ComponentFixture<CampoBasicoComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CampoBasicoComponent ]
-    })
-    .compileComponents();
-  }));
+  let component: KcCampoBasicoComponent;
+  let fixture: ComponentFixture<KcCampoBasicoComponent>;
+  let testInjector: Injector;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CampoBasicoComponent);
+    // refine the test module by declaring the test component
+    TestBed.configureTestingModule({
+      declarations: [KcCampoBasicoComponent],
+      imports: [BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule
+      ],
+      providers: [Injector]
+    });
+
+    // create component and test fixture
+    fixture = TestBed.createComponent(KcCampoBasicoComponent);
+    // get test component from the fixture
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
+    testInjector = TestBed.get(Injector);
   });
 
   it('should create', () => {

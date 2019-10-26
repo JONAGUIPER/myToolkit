@@ -7,12 +7,14 @@ import { Validacion } from '../modelos/validacion';
 })
 export class ValidadoresService {
   constructor() { }
-  
+
   crearListaValidacionesFromJson(listaJson: any): Validacion[] {
     let listaValidaciones: Validacion[] = [];
-    listaJson.validaciones.forEach(element => {
-      listaValidaciones.push(element);
-    });
+    if (listaJson != null) {
+      listaJson.validaciones.forEach(element => {
+        listaValidaciones.push(element);
+      });
+    }
     return listaValidaciones;
   }
 

@@ -12,9 +12,9 @@ import { environment } from '../environments/environment';
 import { ElementoFormularioComponent } from './formulario/elemento-formulario/elemento-formulario.component';
 import { FormularioComponent } from './formulario/formulario/formulario.component';
 import { DynamicComponent } from './formulario/dynamic/dynamic.component';
-import { CampoBasicoComponent } from './formulario/elementos/kc-campo-basico/kc-campo-basico.component';
-import { AreaTextoComponent } from './formulario/elementos/kc-areatexto/kc-area-texto.component';
-import { CollapsableComponent } from './formulario/elementos/kc-collapsable/kc-collapsable.component';
+import { KcCampoBasicoComponent } from './formulario/elementos/kc-campo-basico/kc-campo-basico.component';
+import { KcAreaTextoComponent } from './formulario/elementos/kc-areatexto/kc-area-texto.component';
+import { KcCollapsableComponent } from './formulario/elementos/kc-collapsable/kc-collapsable.component';
 
 //MATERIAL
 import {
@@ -32,9 +32,9 @@ import { KcComboComponent } from './formulario/elementos/kc-combo/kc-combo.compo
 
 const ENTRYCOMPONENTS = [
   
-  CampoBasicoComponent,
-  AreaTextoComponent,
-  CollapsableComponent
+  KcCampoBasicoComponent,
+  KcAreaTextoComponent,
+  KcCollapsableComponent
 ];
 
 const MATERIALMODULES = [
