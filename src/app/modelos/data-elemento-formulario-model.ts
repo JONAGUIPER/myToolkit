@@ -1,4 +1,5 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { Validacion } from './validacion';
 
 export class DataElementoFormularioModel {
     value: any;
@@ -13,7 +14,7 @@ export class DataElementoFormularioModel {
     enLinea: boolean;
     valorPorDefecto: any;
     habilitado: boolean;
-    validaciones: any;
+    validaciones: Validacion[];
     accionesCondicionales: any;
     formato: any;
 
@@ -31,7 +32,7 @@ export class DataElementoFormularioModel {
         valorPorDefecto?: any,
         habilitado?: boolean,
         // TODO: crear los modelos correspondientes
-        validaciones?: any,
+        validaciones?: Validacion[],
         accionesCondicionales?: any,
         formato?: any
 

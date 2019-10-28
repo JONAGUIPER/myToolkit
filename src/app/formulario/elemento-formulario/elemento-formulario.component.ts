@@ -32,8 +32,8 @@ export class ElementoFormularioComponent extends DataElementoFormularioModel imp
   }
 
   setInputs(injector: Injector) {
-    this.form = injector.get<FormGroup>('formulario' as any);
     this.texto = injector.get<string>('texto' as any);
+    this.form = injector.get<FormGroup>('formulario' as any);
     this.name = injector.get<string>('name' as any);
     this.value = injector.get<any>('value' as any);
     this.elementosGrupo = injector.get<any[]>('elementosGrupo' as any);

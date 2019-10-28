@@ -66,7 +66,7 @@ describe('Test Funciones de validacion', () => {
   let servicioValidacion: ValidadoresService;
   let formControl: FormControl;
   beforeEach(() => {
-    TestBed.configureTestingModule({})
+    TestBed.configureTestingModule({});
     servicioValidacion = TestBed.get(ValidadoresService);
     formControl = new FormControl('input');
   });
