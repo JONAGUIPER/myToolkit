@@ -40,7 +40,7 @@ export class ValidadoresService {
   kcRequiredValidator(): ValidatorFn {
     const funcionValidacion = (control: AbstractControl): { [key: string]: any } | null => {
       const inValido = Validators.required(control);
-      return inValido ? { 'kcRequiredValidator': { value: control.value, mensaje: 'Campo obligatorio' } } : null;
+      return inValido ? { 'kcRequiredValidator': { value: control.value, mensaje: 'Mi Campo obligatorio' } } : null;
     };
     return funcionValidacion;
   }
