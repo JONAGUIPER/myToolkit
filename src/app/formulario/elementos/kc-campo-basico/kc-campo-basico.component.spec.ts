@@ -6,12 +6,12 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angul
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { Injector, DebugElement } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
+import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
 import { By } from '@angular/platform-browser';
 import { Validacion } from 'src/app/modelos/validacion';
 import { ValidadoresService } from 'src/app/servicios/validadores.service';
 
-fdescribe('KcCampoBasicoComponent', () => {
+describe('KcCampoBasicoComponent', () => {
   let component: KcCampoBasicoComponent;
   let fixture: ComponentFixture<KcCampoBasicoComponent>;
   let testInjector: Injector;
@@ -41,7 +41,7 @@ fdescribe('KcCampoBasicoComponent', () => {
   });
 
   it('el elemento se crea con todas las propiedades correctamente', () => {
-    const dataElemento = new DataElementoFormularioModel({
+    const dataElemento = new ElementoFormularioBase({
       name: 'inputTest',
       texto: 'label del elemento',
       value: 'valor por Defecto'
@@ -49,16 +49,18 @@ fdescribe('KcCampoBasicoComponent', () => {
     const formulario = new FormGroup({ [dataElemento.name]: new FormControl(dataElemento.value, []) });
     spyOn(testInjector, 'get').and.callFake((token) => {
       switch (token) {
-        case 'texto':
+        /*case 'texto':
           return dataElemento.texto;
-        case 'formulario':
-          return formulario;
         case 'name':
           return dataElemento.name;
         case 'value':
           return dataElemento.value;
         case 'elementosGrupo':
-          return null;
+          return null;*/
+        case 'formulario':
+          return formulario;
+        case 'dataElemento':
+          return dataElemento;
       }
     });
     fixture.detectChanges();
@@ -75,7 +77,7 @@ fdescribe('KcCampoBasicoComponent', () => {
 
   it('el elemento muestra errores cuando es un campo invalido', () => {
     const validaObligatorio: Validacion[] = [{ tipoValidacion: 'required' }];
-    const dataElemento = new DataElementoFormularioModel({
+    const dataElemento = new ElementoFormularioBase({
       name: 'inputTest',
       texto: 'label del elemento',
       value: '',
@@ -89,16 +91,18 @@ fdescribe('KcCampoBasicoComponent', () => {
     });
     spyOn(testInjector, 'get').and.callFake((token: any) => {
       switch (token) {
-        case 'texto':
+        /*case 'texto':
           return dataElemento.texto;
-        case 'formulario':
-          return formulario;
         case 'name':
           return dataElemento.name;
         case 'value':
           return dataElemento.value;
         case 'elementosGrupo':
-          return null;
+          return null;*/
+        case 'dataElemento':
+          return dataElemento;
+        case 'formulario':
+          return formulario;
       }
     });
 
@@ -116,7 +120,7 @@ fdescribe('KcCampoBasicoComponent', () => {
 
   it('el elemento no muestra errores cuando es valido', () => {
     const validaObligatorio: Validacion[] = [{ tipoValidacion: 'required' }];
-    const dataElemento = new DataElementoFormularioModel({
+    const dataElemento = new ElementoFormularioBase({
       name: 'inputTest',
       texto: 'label del elemento',
       value: '',
@@ -130,16 +134,10 @@ fdescribe('KcCampoBasicoComponent', () => {
     });
     spyOn(testInjector, 'get').and.callFake((token: any) => {
       switch (token) {
-        case 'texto':
-          return dataElemento.texto;
         case 'formulario':
           return formulario;
-        case 'name':
-          return dataElemento.name;
-        case 'value':
-          return dataElemento.value;
-        case 'elementosGrupo':
-          return null;
+        case 'dataElemento':
+          return dataElemento;
       }
     });
 

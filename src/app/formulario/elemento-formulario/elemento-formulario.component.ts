@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
+import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
 import { FormGroup, ValidationErrors } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormGroup, ValidationErrors } from '@angular/forms';
   templateUrl: './elemento-formulario.component.html',
   styleUrls: ['./elemento-formulario.component.css']
 })
-export class ElementoFormularioComponent extends DataElementoFormularioModel implements OnInit {
+export class ElementoFormularioComponent extends ElementoFormularioBase implements OnInit {
 
   form: FormGroup;
   elementosFormulario: Array<ElementoFormularioComponent> = new Array<ElementoFormularioComponent>();
@@ -32,11 +32,9 @@ export class ElementoFormularioComponent extends DataElementoFormularioModel imp
   }
 
   setInputs(injector: Injector) {
-    this.texto = injector.get<string>('texto' as any);
+    const dataElemento = injector.get<ElementoFormularioBase>('dataElemento' as any);
+    this.populate(dataElemento);
     this.form = injector.get<FormGroup>('formulario' as any);
-    this.name = injector.get<string>('name' as any);
-    this.value = injector.get<any>('value' as any);
-    this.elementosGrupo = injector.get<any[]>('elementosGrupo' as any);
   }
 
 }

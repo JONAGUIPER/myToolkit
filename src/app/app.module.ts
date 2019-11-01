@@ -31,7 +31,6 @@ import { KcComboComponent } from './formulario/elementos/kc-combo/kc-combo.compo
 
 
 const ENTRYCOMPONENTS = [
-  
   KcCampoBasicoComponent,
   KcAreaTextoComponent,
   KcCollapsableComponent
