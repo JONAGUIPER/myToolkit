@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 
 import { KcAreaTextoComponent } from '../elementos/kc-areatexto/kc-area-texto.component';
 import { KcCampoBasicoComponent } from '../elementos/kc-campo-basico/kc-campo-basico.component';
-import { ElementoFormularioModel } from 'src/app/modelos/elemento-formulario-model';
-import { DataElementoFormularioModel } from 'src/app/modelos/data-elemento-formulario-model';
+import { ElementoFormularioDto } from 'src/app/modelos/elemento-formulario-dto';
+import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
 import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
 import { KcCollapsableComponent } from '../elementos/kc-collapsable/kc-collapsable.component';
 import { ValidadoresService } from 'src/app/servicios/validadores.service';
@@ -28,7 +28,7 @@ export class FormularioComponent implements OnInit {
 
 
   constructor(private formGroupfactory: FormGroupFactoryService,
-              private servicioValidaciones: ValidadoresService) { }
+    private servicioValidaciones: ValidadoresService) { }
 
   ngOnInit() {
     const camposJson = `{
@@ -79,26 +79,27 @@ export class FormularioComponent implements OnInit {
   }
 
   render(camposJson: [] = []) {
-    //const servicioValidaciones = new ValidadoresService();
     camposJson.forEach(elementoFormularioJSON => {
-      let elementoFormulario: ElementoFormularioModel;
-      if (elementoFormularioJSON['tipoElemento'] === 'collapsable') {
-        elementoFormulario = new ElementoFormularioModel(this.servicioValidaciones);
-        elementoFormulario.buildInputs(elementoFormularioJSON);
-        elementoFormulario.inputs.elementosGrupo = []; // elimino estos valores porque los creare inicializados
-        let elementosGrupo: any[] = elementoFormularioJSON['elementosGrupo'];
-        elementosGrupo.forEach(campoCollapsabe => {
-          let elementoCollapsable = new ElementoFormularioModel(this.servicioValidaciones).buildInputs(campoCollapsabe);
-          elementoFormulario.inputs.elementosGrupo.push(elementoCollapsable);
-        });
+      let elementoFormulario: ElementoFormularioDto;
+      if (elementoFormularioJSON['elementosGrupo']) {
+        elementoFormulario = new ElementoFormularioDto(elementoFormularioJSON);
+        elementoFormulario.inputs.dataElemento.elementosGrupo = this.crearElementosGrupo(elementoFormularioJSON['elementosGrupo']);
       } else {
-        elementoFormulario = new ElementoFormularioModel(this.servicioValidaciones).buildInputs(elementoFormularioJSON);
+        elementoFormulario = new ElementoFormularioDto(elementoFormularioJSON);
       }
       this.elementosFormulario.push(elementoFormulario);
     });
     this.form = this.formGroupfactory.toFormGroup(this.elementosFormulario);
     this.formData = JSON.stringify(this.form.value);
 
+  }
+
+  private crearElementosGrupo(elementosGrupo: any[], ) {
+    let elementosDtoGrupo: ElementoFormularioDto[] = [];
+    elementosGrupo.forEach(elementoGrupo => {
+      elementosDtoGrupo.push(new ElementoFormularioDto(elementoGrupo));
+    });
+    return elementosDtoGrupo;
   }
 
   onChange(e) {
