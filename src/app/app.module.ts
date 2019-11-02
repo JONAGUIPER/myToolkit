@@ -15,7 +15,10 @@ import { DynamicComponent } from './formulario/dynamic/dynamic.component';
 import { KcCampoBasicoComponent } from './formulario/elementos/kc-campo-basico/kc-campo-basico.component';
 import { KcAreaTextoComponent } from './formulario/elementos/kc-areatexto/kc-area-texto.component';
 import { KcCollapsableComponent } from './formulario/elementos/kc-collapsable/kc-collapsable.component';
+import { ValidadoresService } from './servicios/validadores.service';
+import { KcComboComponent } from './formulario/elementos/kc-combo/kc-combo.component';
 
+import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
 //MATERIAL
 import {
   MatInputModule,
@@ -23,10 +26,11 @@ import {
   MatCardModule,
   MatToolbarModule,
   MatExpansionModule,
-  MatIconModule
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule
 } from '@angular/material';
-import { ValidadoresService } from './servicios/validadores.service';
-import { KcComboComponent } from './formulario/elementos/kc-combo/kc-combo.component';
+
 
 
 
@@ -42,7 +46,9 @@ const MATERIALMODULES = [
   MatInputModule,
   MatToolbarModule,
   MatExpansionModule,
-  MatIconModule
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule
 ];
 
 @NgModule({
@@ -53,6 +59,7 @@ const MATERIALMODULES = [
     DynamicComponent,
     ENTRYCOMPONENTS,
     KcComboComponent,
+    KcSideBarComponent,
 
   ],
   imports: [
