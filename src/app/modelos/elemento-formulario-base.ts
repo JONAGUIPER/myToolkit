@@ -48,9 +48,9 @@ export class ElementoFormularioBase {
         texto?: string;
         tipoElemento?: string;
         /*
-        etiquetaAyuda?: string; 
-        saltoLinea?: boolean; 
-        enLinea?: boolean; 
+        etiquetaAyuda?: string;
+        saltoLinea?: boolean;
+        enLinea?: boolean;
         habilitado?: boolean;
         */
         valorPorDefecto?: any;

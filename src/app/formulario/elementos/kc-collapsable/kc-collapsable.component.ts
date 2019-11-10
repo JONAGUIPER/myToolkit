@@ -6,7 +6,7 @@ import { DynamicComponent } from '../../dynamic/dynamic.component';
   selector: 'kc-collapsable',
   templateUrl: './kc-collapsable.component.html',
   styleUrls: ['./kc-collapsable.component.css'],
-  //providers:[DynamicComponent]
+  // providers:[DynamicComponent]
 })
 export class KcCollapsableComponent extends ElementoFormularioComponent implements OnInit {
 

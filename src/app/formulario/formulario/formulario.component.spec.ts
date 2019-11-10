@@ -1,32 +1,25 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 
 import { FormularioComponent } from './formulario.component';
-import { DynamicComponent } from '../dynamic/dynamic.component';
-import { MatFormField, MatError } from '@angular/material';
 import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AppModule } from 'src/app/app.module';
 import { ValidadoresService } from 'src/app/servicios/validadores.service';
 
 class MockFormGroupFactoryService extends FormGroupFactoryService {
   toFormGroup() {
-    let fieldControl: any = {};
-    fieldControl['campo1'] = new FormControl('', Validators.required);
+    const fieldControl = { campo1: new FormControl('', Validators.required) };
     return new FormGroup(fieldControl);
   }
 }
 
 describe('FormularioComponent', () => {
   let component: FormularioComponent;
-  let fixture: ComponentFixture<FormularioComponent>;
-  let formGroupFactoryServiceStub: FormGroupFactoryService;
   let testFormGroupFactory: FormGroupFactoryService;
-  let testValidacionesService: ValidadoresService;
   let mockFormGroupFactory: FormGroupFactoryService;
   let mockComponent: FormularioComponent;
 
   let modeloRender: any;
-  beforeAll(function () {
+  beforeAll(() => {
     const camposJson = `{
       "elementosFormulario": [
         {

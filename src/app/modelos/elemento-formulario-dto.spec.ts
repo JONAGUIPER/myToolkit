@@ -5,7 +5,7 @@ import { ValidadoresService } from '../servicios/validadores.service';
 describe('ElementoFormularioDto', () => {
   'use strict';
   let modeloRender;
-  beforeAll(function () {
+  beforeAll(() => {
     const camposJson = `{
       "elementosFormulario": [
         {
@@ -42,7 +42,7 @@ describe('ElementoFormularioDto', () => {
   });
 
   it('contruye un campo basico', () => {
-    let campoBasico = new ElementoFormularioDto(modeloRender.elementosFormulario[0]);
+    const campoBasico = new ElementoFormularioDto(modeloRender.elementosFormulario[0]);
     expect(campoBasico.component).toBe(KcCampoBasicoComponent);
     expect(campoBasico.inputs).toBeTruthy();
     expect(campoBasico.inputs.dataElemento.name).toEqual('campo1');

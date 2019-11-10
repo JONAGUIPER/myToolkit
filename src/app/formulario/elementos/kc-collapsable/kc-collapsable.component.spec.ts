@@ -15,7 +15,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
 
-//TODO: seguir investigando y si es necesario testear que se rendericen los elementos del grupo
+// TODO: seguir investigando y si es necesario testear que se rendericen los elementos del grupo
 describe('CollapsableComponent', () => {
   let component: KcCollapsableComponent;
   let fixture: ComponentFixture<KcCollapsableComponent>;
@@ -53,7 +53,7 @@ describe('CollapsableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         KcCollapsableComponent,
-        //DynamicComponent,
+        // DynamicComponent,
         KcCampoBasicoComponent,
         KcAreaTextoComponent,
         ElementoFormularioComponent,
@@ -79,7 +79,7 @@ describe('CollapsableComponent', () => {
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
         entryComponents: [
-          //DynamicComponent,
+          // DynamicComponent,
           KcCollapsableComponent,
           KcCampoBasicoComponent,
           KcAreaTextoComponent,

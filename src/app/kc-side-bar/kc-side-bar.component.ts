@@ -10,9 +10,9 @@ export class KcSideBarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   fillerNav = ['formulario dinamico'];
 
-  
+
   private mobileQueryListener: () => void;
-  
+
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();

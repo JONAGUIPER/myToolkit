@@ -19,7 +19,6 @@ describe('AreaTextoComponent', () => {
     <form [formGroup]="form" ><kc-area-texto></kc-area-texto></form >`
   })
   class TestHostComponent {
-    //@ViewChild('dynamicComponentContainer', { read: ViewContainerRef, static: true }) dynamicComponentContainer: ViewContainerRef;
     @ViewChild('AreaTextoComponent', { read: ViewContainerRef, static: true })
     public AreaTextoComponent: KcAreaTextoComponent;
     form: FormGroup;
@@ -61,7 +60,7 @@ describe('AreaTextoComponent', () => {
     let nombreCampo = 'areaTest';
     let formulario = new FormGroup({ ['areaTest']: new FormControl('', []) });
     expect(testHostComponent).toBeTruthy();
-    
+
     let formBuilder = new FormBuilder();
     testHostComponent.form = formBuilder.group({
       areaTest: null

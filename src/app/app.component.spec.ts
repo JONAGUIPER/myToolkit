@@ -37,7 +37,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-   
+
     expect(compiled.querySelector('.mat-toolbar h1').textContent).toContain('My Toolkit');
   });*/
 });

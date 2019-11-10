@@ -19,7 +19,7 @@ import { ValidadoresService } from './servicios/validadores.service';
 import { KcComboComponent } from './formulario/elementos/kc-combo/kc-combo.component';
 
 import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
-//MATERIAL
+// MATERIAL
 import {
   MatInputModule,
   MatFormFieldModule,

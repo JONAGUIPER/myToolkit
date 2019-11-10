@@ -81,9 +81,9 @@ export class FormularioComponent implements OnInit {
   render(camposJson: any[] = []) {
     camposJson.forEach(elementoFormularioJSON => {
       let elementoFormulario: ElementoFormularioDto;
-      if (elementoFormularioJSON['elementosGrupo']) {
+      if (elementoFormularioJSON.elementosGrupo) {
         elementoFormulario = new ElementoFormularioDto(elementoFormularioJSON);
-        elementoFormulario.inputs.dataElemento.elementosGrupo = this.crearElementosGrupo(elementoFormularioJSON['elementosGrupo']);
+        elementoFormulario.inputs.dataElemento.elementosGrupo = this.crearElementosGrupo(elementoFormularioJSON.elementosGrupo);
       } else {
         elementoFormulario = new ElementoFormularioDto(elementoFormularioJSON);
       }

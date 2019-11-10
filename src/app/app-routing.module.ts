@@ -5,7 +5,7 @@ import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
 
 
 const routes: Routes = [
-  //{ path: '', component: FormularioComponent },
+  // { path: '', component: FormularioComponent },
   { path: '', component: KcSideBarComponent },
   { path: 'sidebar', component: KcSideBarComponent }
 ];
