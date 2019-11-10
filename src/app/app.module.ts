@@ -37,7 +37,8 @@ import {
 const ENTRYCOMPONENTS = [
   KcCampoBasicoComponent,
   KcAreaTextoComponent,
-  KcCollapsableComponent
+  KcCollapsableComponent,
+  KcComboComponent
 ];
 
 const MATERIALMODULES = [
@@ -58,10 +59,8 @@ const MATERIALMODULES = [
     FormularioComponent,
     DynamicComponent,
     ENTRYCOMPONENTS,
-    KcComboComponent,
     KcSideBarComponent,
-
-  ],
+ ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

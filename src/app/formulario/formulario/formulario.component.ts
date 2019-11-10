@@ -16,7 +16,7 @@ import { ValidadoresService } from 'src/app/servicios/validadores.service';
 })
 export class FormularioComponent implements OnInit {
   // @Output() onSubmit = new EventEmitter();
-  elementosFormulario: Array<any> = new Array<any>();
+  elementosFormulario: Array<ElementoFormularioDto> = new Array<ElementoFormularioDto>();
   form: FormGroup;
   formData = '';
   /*dataElemento: any = {
@@ -28,7 +28,7 @@ export class FormularioComponent implements OnInit {
 
 
   constructor(private formGroupfactory: FormGroupFactoryService,
-    private servicioValidaciones: ValidadoresService) { }
+    ) { }
 
   ngOnInit() {
     const camposJson = `{
@@ -78,7 +78,7 @@ export class FormularioComponent implements OnInit {
 
   }
 
-  render(camposJson: [] = []) {
+  render(camposJson: any[] = []) {
     camposJson.forEach(elementoFormularioJSON => {
       let elementoFormulario: ElementoFormularioDto;
       if (elementoFormularioJSON['elementosGrupo']) {
@@ -95,7 +95,7 @@ export class FormularioComponent implements OnInit {
   }
 
   private crearElementosGrupo(elementosGrupo: any[], ) {
-    let elementosDtoGrupo: ElementoFormularioDto[] = [];
+    const elementosDtoGrupo: ElementoFormularioDto[] = [];
     elementosGrupo.forEach(elementoGrupo => {
       elementosDtoGrupo.push(new ElementoFormularioDto(elementoGrupo));
     });

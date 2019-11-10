@@ -1,16 +1,20 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Inject, ComponentFactoryResolver, Host } from '@angular/core';
 import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
+import { DynamicComponent } from '../../dynamic/dynamic.component';
 
 @Component({
   selector: 'kc-collapsable',
   templateUrl: './kc-collapsable.component.html',
-  styleUrls: ['./kc-collapsable.component.css']
+  styleUrls: ['./kc-collapsable.component.css'],
+  //providers:[DynamicComponent]
 })
 export class KcCollapsableComponent extends ElementoFormularioComponent implements OnInit {
 
   panelOpenState: boolean;
-  constructor(private injector: Injector) {
+  injector: Injector;
+  constructor(@Inject(Injector) injector: Injector) {
     super();
+    this.injector = injector;
     this.tipoElemento = 'collapsable';
   }
 

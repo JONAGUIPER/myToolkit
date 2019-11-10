@@ -65,9 +65,9 @@ describe('FormularioComponent', () => {
   beforeEach(() => {
     const servicioValidaciones = new ValidadoresService();
     testFormGroupFactory = new FormGroupFactoryService(servicioValidaciones);
-    component = new FormularioComponent(testFormGroupFactory, testValidacionesService);
+    component = new FormularioComponent(testFormGroupFactory);
     mockFormGroupFactory = new MockFormGroupFactoryService(servicioValidaciones);
-    mockComponent = new FormularioComponent(mockFormGroupFactory, testValidacionesService);
+    mockComponent = new FormularioComponent(mockFormGroupFactory);
     /*
         TestBed.configureTestingModule({
           declarations: [FormularioComponent,
@@ -104,5 +104,50 @@ describe('FormularioComponent', () => {
   });
   it('should create con servicio mockeado', () => {
     expect(mockComponent).toBeTruthy();
+  });
+  it('se puede renderizar un elemento unico (campo basico)', () => {
+    component.render([
+      {
+        name: 'campo1',
+        tipoElemento: 'campoBasico',
+        texto: 'holamundo campobasico',
+        validaciones: [
+          { tipoValidacion: 'required' },
+          { tipoValidacion: 'email' }
+        ]
+      }
+    ]);
+    expect(component.form).toBeTruthy();
+    expect(component.form.get('campo1') instanceof FormControl).toBeTruthy();
+    expect(component.elementosFormulario).toBeTruthy();
+    expect(component.elementosFormulario.length).toEqual(1);
+  });
+
+  it('se puede renderizar un elemento co sub elementos (collapsable)', () => {
+    component.render([
+      {
+        name: 'miCollapsable',
+        tipoElemento: 'collapsable',
+        texto: 'holamundo collapsable',
+        elementosGrupo: [
+          {
+            name: 'campo1Colapsable',
+            tipoElemento: 'campoBasico',
+            texto: 'holamundo campoBasico collapsable'
+          },
+          {
+            name: 'area1Collapsable',
+            tipoElemento: 'areaTexto',
+            texto: 'holamundo AreaTexto collapsable'
+          }
+        ]
+      }
+    ]);
+    expect(component.form).toBeTruthy();
+    expect(component.form.get('campo1Colapsable') instanceof FormControl).toBeTruthy();
+    expect(component.elementosFormulario).toBeTruthy();
+    console.log(component.elementosFormulario[0].inputs.dataElemento);
+    expect(component.elementosFormulario.length).toEqual(1);
+    expect(component.elementosFormulario[0].inputs.dataElemento.elementosGrupo.length).toEqual(2);
   });
 });

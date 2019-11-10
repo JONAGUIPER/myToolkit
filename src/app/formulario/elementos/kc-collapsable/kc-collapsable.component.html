@@ -1,9 +1,9 @@
 <mat-accordion>
 
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [id]="name">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Titulo collapsable
+        {{texto}}
       </mat-panel-title>
       <mat-panel-description>
         Currently I am {{panelOpenState ? 'open' : 'closed'}}
@@ -13,9 +13,12 @@
     </mat-expansion-panel-header>
     <p>ELEMENTOS QUE COMPONEN EL CUERPO DEL COLLAPSABLE</p>
     
+    <!-- <ng-container  *ngIf="elementosGrupo.length"> -->
+      <div  *ngFor="let elemento of elementosGrupo; let i=index">
+        <kc-dynamic  [componentData]="elemento" [formulario]="form"></kc-dynamic>
+      </div>
+    <!-- </ng-container> -->
     
-    <div  *ngFor="let elemento of elementosGrupo; let i=index">
-      <kc-dynamic  [componentData]="elemento" [formulario]="form"></kc-dynamic>
-    </div>
+    
   </mat-expansion-panel>
 </mat-accordion>

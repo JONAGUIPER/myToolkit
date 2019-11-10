@@ -1,5 +1,6 @@
-import { Component, ComponentFactoryResolver, Input, ReflectiveInjector, ViewChild, ViewContainerRef, Injector, EventEmitter, Output } from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, ViewChild, ViewContainerRef, Injector, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'kc-dynamic',
@@ -9,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 export class DynamicComponent {
 
   currentComponent = null;
-
+  //componentFactoryResolver: ComponentFactoryResolver;
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef, static: true }) dynamicComponentContainer: ViewContainerRef;
   @Input() formulario: FormGroup;
   @Input() set componentData(data: { component: any, inputs: any }) {
@@ -33,7 +34,7 @@ export class DynamicComponent {
     // const injector = ReflectiveInjector.fromResolvedProviders(resolvedInputs, this.dynamicComponentContainer.parentInjector);
 
     const injector = Injector.create({ providers: inputProviders, parent: this.dynamicComponentContainer.parentInjector });
-
+    console.log('resolviendo: ' + data.inputs.dataElemento.name);
     const factory = this.componentFactoryResolver.resolveComponentFactory(data.component);
 
     const component = factory.create(injector);
@@ -47,6 +48,9 @@ export class DynamicComponent {
     this.currentComponent = component;
   }
 
+  // constructor(@Inject(ComponentFactoryResolver) componentFactoryResolver: ComponentFactoryResolver) {
+  //   this.componentFactoryResolver = componentFactoryResolver;
+  // }
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 }

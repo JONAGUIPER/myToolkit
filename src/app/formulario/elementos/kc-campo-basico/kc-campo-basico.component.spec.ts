@@ -49,14 +49,6 @@ describe('KcCampoBasicoComponent', () => {
     const formulario = new FormGroup({ [dataElemento.name]: new FormControl(dataElemento.value, []) });
     spyOn(testInjector, 'get').and.callFake((token) => {
       switch (token) {
-        /*case 'texto':
-          return dataElemento.texto;
-        case 'name':
-          return dataElemento.name;
-        case 'value':
-          return dataElemento.value;
-        case 'elementosGrupo':
-          return null;*/
         case 'formulario':
           return formulario;
         case 'dataElemento':
