@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
+import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
 import { FormGroup, ValidationErrors } from '@angular/forms';
 
 @Component({

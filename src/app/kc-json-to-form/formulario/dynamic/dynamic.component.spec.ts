@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
-import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
+import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
 
 describe('DynamicComponent', () => {
   let component: DynamicComponent;

@@ -7,8 +7,8 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angul
 import { MatExpansionModule, MatIconModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { DynamicComponent } from '../../dynamic/dynamic.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
-import { ElementoFormularioDto } from 'src/app/modelos/elemento-formulario-dto';
+import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
+import { ElementoFormularioDto } from 'src/app/kc-json-to-form/modelos/elemento-formulario-dto';
 import { KcAreaTextoComponent } from '../kc-areatexto/kc-area-texto.component';
 import { KcCampoBasicoComponent } from '../kc-campo-basico/kc-campo-basico.component';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';

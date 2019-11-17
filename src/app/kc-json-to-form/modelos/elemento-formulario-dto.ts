@@ -13,7 +13,10 @@ export class ElementoFormularioDto {
     this.component = this.getObjectComponent(datosInput.tipoElemento);
     this.inputs = { dataElemento: new ElementoFormularioBase(datosInput) };
   }
-
+  get elementosGrupo() {
+    return this.inputs.dataElemento.elementosGrupo;
+  }
+  
   private getObjectComponent(componentName: string): any {
     switch (componentName) {
       case 'campoBasico':

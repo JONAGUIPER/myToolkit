@@ -15,7 +15,7 @@
     
     <!-- <ng-container  *ngIf="elementosGrupo.length"> -->
       <div  *ngFor="let elemento of elementosGrupo; let i=index">
-        <kc-dynamic  [componentData]="elemento" [formulario]="form"></kc-dynamic>
+        <kc-dynamic  [formulario]="form" [componentData]="elemento"></kc-dynamic>
       </div>
     <!-- </ng-container> -->
     
