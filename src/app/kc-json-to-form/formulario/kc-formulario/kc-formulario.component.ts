@@ -1,23 +1,28 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { KcAreaTextoComponent } from '../elementos/kc-areatexto/kc-area-texto.component';
-import { KcCampoBasicoComponent } from '../elementos/kc-campo-basico/kc-campo-basico.component';
-import { ElementoFormularioDto } from 'src/app/modelos/elemento-formulario-dto';
-import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
-import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
-import { KcCollapsableComponent } from '../elementos/kc-collapsable/kc-collapsable.component';
-import { ValidadoresService } from 'src/app/servicios/validadores.service';
+import { FormGroupFactoryService } from 'src/app/kc-json-to-form/servicios/form-group-factory.service';
+import { FormDefinition } from '../../modelos/form-definition';
+import { ElementoFormularioDto } from '../../modelos/elemento-formulario-dto';
 
 @Component({
   selector: 'kc-formulario',
-  templateUrl: './formulario.component.html',
-  styleUrls: ['./formulario.component.css']
+  templateUrl: './kc-formulario.component.html',
+  styleUrls: ['./kc-formulario.component.css']
 })
-export class FormularioComponent implements OnInit {
+export class KcFormularioComponent implements OnInit {
   // @Output() onSubmit = new EventEmitter();
+  @Input() set formDefinition(definicionFormulario: FormDefinition) {
+    if (definicionFormulario) {
+      this.idForm = definicionFormulario.name;
+      this.render(definicionFormulario.elementosFormulario);
+    }
+
+  }
   elementosFormulario: Array<ElementoFormularioDto> = new Array<ElementoFormularioDto>();
   form: FormGroup;
+  idForm = 'formFromJson';
+  datosPrecargados: any;
   formData = '';
   /*dataElemento: any = {
     component: AreaTextoComponent,
@@ -28,7 +33,7 @@ export class FormularioComponent implements OnInit {
 
 
   constructor(private formGroupfactory: FormGroupFactoryService,
-    ) { }
+  ) { }
 
   ngOnInit() {
     const camposJson = `{
@@ -75,10 +80,10 @@ export class FormularioComponent implements OnInit {
       console.log(element);
     });
     this.render(modeloRender.elementosFormulario);
-
   }
 
-  render(camposJson: any[] = []) {
+  render(camposJson: ElementoFormularioDto[] = []) {
+    this.elementosFormulario.length = 0;
     camposJson.forEach(elementoFormularioJSON => {
       let elementoFormulario: ElementoFormularioDto;
       if (elementoFormularioJSON.elementosGrupo) {
@@ -90,7 +95,7 @@ export class FormularioComponent implements OnInit {
       this.elementosFormulario.push(elementoFormulario);
     });
     this.form = this.formGroupfactory.toFormGroup(this.elementosFormulario);
-    this.formData = JSON.stringify(this.form.value);
+    //this.formData = JSON.stringify(this.form.value);
 
   }
 

@@ -1,0 +1,26 @@
+<h1>nueva implementacion</h1>
+<ng-container *ngIf="elementosFormulario.length>0; then formRendered; else formNotExist"></ng-container>
+<ng-template #formRendered>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" [id]="idForm" [name]="idForm">
+        <div *ngFor="let elemento of elementosFormulario; let i=index">
+            <kc-dynamic [formulario]="form" [componentData]="elemento" ></kc-dynamic>
+        </div>
+    
+        <div class="form-row">
+            <strong>Los valores que se encuentran son:</strong>
+            <br>{{form.value | json}}
+        </div>
+        <div class="form-row">
+            <strong>Form status:</strong><br>{{form.status}}
+        </div>
+        <div class="form-row">
+            <button type="submit" [disabled]="!form.valid">Save</button>
+        </div>
+    </form>
+</ng-template>
+<ng-template #formNotExist>
+    <h1>Formulario NO definido</h1>
+</ng-template>
+
+
+

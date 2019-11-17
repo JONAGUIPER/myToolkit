@@ -8,7 +8,10 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class KcSideBarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
-  fillerNav = ['formulario dinamico'];
+  fillerNav = [
+    { link: '//testing', caption: 'formulario dinamico' },
+    { link: '//demo', caption: 'funcionamiento demo' },
+  ];
 
 
   private mobileQueryListener: () => void;

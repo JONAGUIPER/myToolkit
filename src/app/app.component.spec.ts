@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from '@angular/material';
-import { FormularioComponent } from './formulario/formulario/formulario.component';
+import { KcFormularioComponent } from './kc-json-to-form/formulario/kc-formulario/kc-formulario.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
@@ -15,7 +15,7 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        FormularioComponent
+        KcFormularioComponent
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

@@ -1,0 +1,23 @@
+<h2>Introduzca la definición del formulario en forma de JSON</h2>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="formDemo">
+    <mat-form-field>
+        <textarea matInput 
+            placeholder="Json del formulario a crear" 
+            formControlName="jsonText"
+            rows ='10'>
+        </textarea>
+    </mat-form-field>
+    <div class="form-row">
+        <strong>Los valores que se encuentran son:</strong>
+        <br>{{formDemo.value |json}}
+    </div>
+    <div class="form-row">
+        <strong>Form status:</strong><br>{{formDemo.status}}
+    </div>
+    <div class="form-row">
+        <button type="submit" [disabled]="!formDemo.valid" >crear formulario</button>
+    </div>
+</form>
+
+<kc-formulario [formDefinition]="formDefinitionARenderizar"></kc-formulario>

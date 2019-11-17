@@ -1,9 +1,9 @@
 import { ComponentFixture } from '@angular/core/testing';
 
-import { FormularioComponent } from './formulario.component';
-import { FormGroupFactoryService } from 'src/app/servicios/form-group-factory.service';
+import { KcFormularioComponent } from './kc-formulario.component';
+import { FormGroupFactoryService } from 'src/app/kc-json-to-form/servicios/form-group-factory.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ValidadoresService } from 'src/app/servicios/validadores.service';
+import { ValidadoresService } from 'src/app/kc-json-to-form/servicios/validadores.service';
 
 class MockFormGroupFactoryService extends FormGroupFactoryService {
   toFormGroup() {
@@ -13,10 +13,10 @@ class MockFormGroupFactoryService extends FormGroupFactoryService {
 }
 
 describe('FormularioComponent', () => {
-  let component: FormularioComponent;
+  let component: KcFormularioComponent;
   let testFormGroupFactory: FormGroupFactoryService;
   let mockFormGroupFactory: FormGroupFactoryService;
-  let mockComponent: FormularioComponent;
+  let mockComponent: KcFormularioComponent;
 
   let modeloRender: any;
   beforeAll(() => {
@@ -58,9 +58,9 @@ describe('FormularioComponent', () => {
   beforeEach(() => {
     const servicioValidaciones = new ValidadoresService();
     testFormGroupFactory = new FormGroupFactoryService(servicioValidaciones);
-    component = new FormularioComponent(testFormGroupFactory);
+    component = new KcFormularioComponent(testFormGroupFactory);
     mockFormGroupFactory = new MockFormGroupFactoryService(servicioValidaciones);
-    mockComponent = new FormularioComponent(mockFormGroupFactory);
+    mockComponent = new KcFormularioComponent(mockFormGroupFactory);
     /*
         TestBed.configureTestingModule({
           declarations: [FormularioComponent,

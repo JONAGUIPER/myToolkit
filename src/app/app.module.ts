@@ -9,30 +9,20 @@ import { environment } from '../environments/environment';
 
 // mis componentes
 
-import { ElementoFormularioComponent } from './formulario/elemento-formulario/elemento-formulario.component';
-import { FormularioComponent } from './formulario/formulario/formulario.component';
-import { DynamicComponent } from './formulario/dynamic/dynamic.component';
-import { KcCampoBasicoComponent } from './formulario/elementos/kc-campo-basico/kc-campo-basico.component';
-import { KcAreaTextoComponent } from './formulario/elementos/kc-areatexto/kc-area-texto.component';
-import { KcCollapsableComponent } from './formulario/elementos/kc-collapsable/kc-collapsable.component';
-import { ValidadoresService } from './servicios/validadores.service';
-import { KcComboComponent } from './formulario/elementos/kc-combo/kc-combo.component';
+import { ElementoFormularioComponent } from './kc-json-to-form/formulario/elemento-formulario/elemento-formulario.component';
+import { KcFormularioComponent } from './kc-json-to-form/formulario/kc-formulario/kc-formulario.component';
+import { DynamicComponent } from './kc-json-to-form/formulario/dynamic/dynamic.component';
+import { KcCampoBasicoComponent } from './kc-json-to-form/formulario/elementos/kc-campo-basico/kc-campo-basico.component';
+import { KcAreaTextoComponent } from './kc-json-to-form/formulario/elementos/kc-areatexto/kc-area-texto.component';
+import { KcCollapsableComponent } from './kc-json-to-form/formulario/elementos/kc-collapsable/kc-collapsable.component';
+import { ValidadoresService } from './kc-json-to-form/servicios/validadores.service';
+import { KcComboComponent } from './kc-json-to-form/formulario/elementos/kc-combo/kc-combo.component';
 
 import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
 // MATERIAL
-import {
-  MatInputModule,
-  MatFormFieldModule,
-  MatCardModule,
-  MatToolbarModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatSidenavModule,
-  MatListModule
-} from '@angular/material';
-
-
-
+import { MaterialModule } from './material/material.module';
+import { KcJsonToFormModule } from './kc-json-to-form/kc-json-to-form-module';
+import { FormularioDemoComponent } from './formulario-demo/formulario-demo.component';
 
 const ENTRYCOMPONENTS = [
   KcCampoBasicoComponent,
@@ -41,35 +31,22 @@ const ENTRYCOMPONENTS = [
   KcComboComponent
 ];
 
-const MATERIALMODULES = [
-  MatFormFieldModule,
-  MatCardModule,
-  MatInputModule,
-  MatToolbarModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatSidenavModule,
-  MatListModule
-];
-
 @NgModule({
   declarations: [
     AppComponent,
-    ElementoFormularioComponent,
-    FormularioComponent,
-    DynamicComponent,
-    ENTRYCOMPONENTS,
     KcSideBarComponent,
- ],
+    FormularioDemoComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MATERIALMODULES,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MaterialModule,
+    KcJsonToFormModule,
   ],
-  providers: [ValidadoresService],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents: [ENTRYCOMPONENTS]
 })

@@ -6,10 +6,10 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angul
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { Injector, DebugElement } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ElementoFormularioBase } from 'src/app/modelos/elemento-formulario-base';
+import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
 import { By } from '@angular/platform-browser';
-import { Validacion } from 'src/app/modelos/validacion';
-import { ValidadoresService } from 'src/app/servicios/validadores.service';
+import { Validacion } from 'src/app/kc-json-to-form/modelos/validacion';
+import { ValidadoresService } from 'src/app/kc-json-to-form/servicios/validadores.service';
 
 describe('KcCampoBasicoComponent', () => {
   let component: KcCampoBasicoComponent;

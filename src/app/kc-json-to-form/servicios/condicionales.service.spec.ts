@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { CondicionalesService } from './condicionales.service';
 import { Condicion } from '../modelos/condicion';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FormularioComponent } from '../formulario/formulario/formulario.component';
+import { KcFormularioComponent } from '../formulario/kc-formulario/kc-formulario.component';
 import { CondicionesEnum } from '../enumeradores/condiciones-enum.enum';
 import { Condiciones } from '../modelos/condiciones';
 

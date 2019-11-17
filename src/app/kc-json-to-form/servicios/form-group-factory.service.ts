@@ -8,9 +8,9 @@ import { ValidadoresService } from './validadores.service';
 })
 export class FormGroupFactoryService {
 
-  constructor( private validadorService: ValidadoresService) { }
+  constructor(private validadorService: ValidadoresService) { }
 
-  toFormGroup(elemetosDto: ElementoFormularioDto[]) {
+  toFormGroup(elemetosDto: ElementoFormularioDto[]): FormGroup {
     let fieldControl: any = {};
     elemetosDto.forEach(elementoDto => {
       const dataElemento = elementoDto.inputs.dataElemento;
@@ -25,12 +25,12 @@ export class FormGroupFactoryService {
     });
     return new FormGroup(fieldControl);
   }
-  private toFormGroupAnidado(elementosDtoAnidados: ElementoFormularioDto[]) {
+  private toFormGroupAnidado(elementosDtoAnidados: ElementoFormularioDto[]): FormGroup {
     let fieldControlAnidado: any = {};
     elementosDtoAnidados.forEach(elementoDtoAnidado => {
       const dataElementoAnidado = elementoDtoAnidado.inputs.dataElemento;
       if (dataElementoAnidado.elementosGrupo) {
-        let subCamposAnidados=this.toFormGroupAnidado(dataElementoAnidado.elementosGrupo);
+        let subCamposAnidados = this.toFormGroupAnidado(dataElementoAnidado.elementosGrupo);
         fieldControlAnidado = { ...fieldControlAnidado, ...subCamposAnidados };
       } else {
         fieldControlAnidado[dataElementoAnidado.name] = dataElementoAnidado.validaciones

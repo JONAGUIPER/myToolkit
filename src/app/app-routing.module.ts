@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FormularioComponent } from './formulario/formulario/formulario.component';
+import { KcFormularioComponent } from './kc-json-to-form/formulario/kc-formulario/kc-formulario.component';
 import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
+import { FormularioDemoComponent } from './formulario-demo/formulario-demo.component';
 
 
 const routes: Routes = [
-  // { path: '', component: FormularioComponent },
-  { path: '', component: KcSideBarComponent },
-  { path: 'sidebar', component: KcSideBarComponent }
+  { path: '', component: KcFormularioComponent },
+  { path: 'testing', component: KcFormularioComponent },
+  { path: 'demo', component: FormularioDemoComponent }
 ];
 
 @NgModule({
