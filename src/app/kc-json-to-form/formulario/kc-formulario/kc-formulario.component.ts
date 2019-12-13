@@ -90,7 +90,7 @@ export class KcFormularioComponent implements OnInit {
         elementoFormulario = new ElementoFormularioDto(elementoFormularioJSON);
         elementoFormulario.inputs.dataElemento.elementosGrupo = this.crearElementosGrupo(elementoFormularioJSON.elementosGrupo);
       } else {
-        elementoFormulario = new ElementoFormularioDto(elementoFormularioJSON);
+        elementoFormulario = elementoFormularioJSON;
       }
       this.elementosFormulario.push(elementoFormulario);
     });

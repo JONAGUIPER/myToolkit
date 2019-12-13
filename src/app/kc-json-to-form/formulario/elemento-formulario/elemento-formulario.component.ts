@@ -32,9 +32,9 @@ export class ElementoFormularioComponent extends ElementoFormularioBase implemen
   }
 
   setInputs(injector: Injector) {
+    this.form = injector.get<FormGroup>('formulario' as any);
     const dataElemento = injector.get<ElementoFormularioBase>('dataElemento' as any);
     this.populate(dataElemento);
-    this.form = injector.get<FormGroup>('formulario' as any);
   }
 
 }

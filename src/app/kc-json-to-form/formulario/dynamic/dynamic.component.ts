@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 export class DynamicComponent {
 
   currentComponent = null;
-  // componentFactoryResolver: ComponentFactoryResolver;
+  componentFactoryResolver: ComponentFactoryResolver;
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef, static: true }) dynamicComponentContainer: ViewContainerRef;
   @Input() formulario: FormGroup;
   @Input() set componentData(data: { component: any, inputs: any }) {
@@ -48,9 +48,9 @@ export class DynamicComponent {
     this.currentComponent = component;
   }
 
-  // constructor(@Inject(ComponentFactoryResolver) componentFactoryResolver: ComponentFactoryResolver) {
-  //   this.componentFactoryResolver = componentFactoryResolver;
-  // }
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
-  }
+   constructor(@Inject(ComponentFactoryResolver) componentFactoryResolver: ComponentFactoryResolver) {
+     this.componentFactoryResolver = componentFactoryResolver;
+   }
+  //constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  //}
 }

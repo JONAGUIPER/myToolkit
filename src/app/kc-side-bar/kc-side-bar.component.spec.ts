@@ -5,7 +5,7 @@ import { MatSidenavModule, MatListModule, MatIconModule } from '@angular/materia
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('KcSideBarComponent', () => {
+xdescribe('KcSideBarComponent', () => {
   let component: KcSideBarComponent;
   let fixture: ComponentFixture<KcSideBarComponent>;
 

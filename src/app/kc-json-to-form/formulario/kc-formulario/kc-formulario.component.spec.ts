@@ -4,6 +4,7 @@ import { KcFormularioComponent } from './kc-formulario.component';
 import { FormGroupFactoryService } from 'src/app/kc-json-to-form/servicios/form-group-factory.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidadoresService } from 'src/app/kc-json-to-form/servicios/validadores.service';
+import { ElementoFormularioDto } from '../../modelos/elemento-formulario-dto';
 
 class MockFormGroupFactoryService extends FormGroupFactoryService {
   toFormGroup() {
@@ -86,10 +87,10 @@ describe('FormularioComponent', () => {
     fixture.detectChanges();*/
   });
 
-  afterEach(() => {
+  /*afterEach(() => {
     testFormGroupFactory = null;
     component = null;
-  });
+  });*/
 
 
   it('should create', () => {
@@ -100,15 +101,15 @@ describe('FormularioComponent', () => {
   });
   it('se puede renderizar un elemento unico (campo basico)', () => {
     component.render([
-      {
-        name: 'campo1',
+      new ElementoFormularioDto({
         tipoElemento: 'campoBasico',
+        name: 'campo1',
         texto: 'holamundo campobasico',
         validaciones: [
           { tipoValidacion: 'required' },
           { tipoValidacion: 'email' }
         ]
-      }
+      })
     ]);
     expect(component.form).toBeTruthy();
     expect(component.form.get('campo1') instanceof FormControl).toBeTruthy();
@@ -116,11 +117,11 @@ describe('FormularioComponent', () => {
     expect(component.elementosFormulario.length).toEqual(1);
   });
 
-  it('se puede renderizar un elemento co sub elementos (collapsable)', () => {
+  it('se puede renderizar un elemento con sub elementos (collapsable)', () => {
     component.render([
-      {
-        name: 'miCollapsable',
+      new ElementoFormularioDto({
         tipoElemento: 'collapsable',
+        name: 'miCollapsable',
         texto: 'holamundo collapsable',
         elementosGrupo: [
           {
@@ -134,7 +135,8 @@ describe('FormularioComponent', () => {
             texto: 'holamundo AreaTexto collapsable'
           }
         ]
-      }
+      })
+
     ]);
     expect(component.form).toBeTruthy();
     expect(component.form.get('campo1Colapsable') instanceof FormControl).toBeTruthy();

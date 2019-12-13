@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, async } from '@angular/core/testing';
 
 import { KcCollapsableComponent } from './kc-collapsable.component';
 import { Injector, DebugElement, ComponentFactoryResolver, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -21,43 +21,44 @@ describe('CollapsableComponent', () => {
   let fixture: ComponentFixture<KcCollapsableComponent>;
   let testInjector: Injector;
   let testFactoryResolver: ComponentFactoryResolver;
+  let componentService: ComponentFactoryResolver;
 
   const dataElemento = new ElementoFormularioBase({
     name: 'collapsableTest',
-    texto: 'label del elemento',
+    texto: 'label del elemento en Test',
     tipoElemento: 'collapsable',
     elementosGrupo: [
-      new ElementoFormularioDto({
-        name: 'campo1Colapsable',
-        tipoElemento: 'campoBasico',
-        texto: 'holamundo campoBasico collapsable',
-        value: 'valorDefecto1'
-      }),
-      new ElementoFormularioDto({
-        name: 'area1Collapsable',
-        tipoElemento: 'areaTexto',
-        texto: 'holamundo AreaTexto collapsable',
-        value: 'valorDefecto2'
-      })
+      /* new ElementoFormularioDto({
+         name: 'campo1Colapsable en',
+         tipoElemento: 'campoBasico',
+         texto: 'holamundo campoBasico collapsable en Test',
+         value: 'valorDefecto1'
+       }),
+       new ElementoFormularioDto({
+         name: 'area1Collapsable',
+         tipoElemento: 'areaTexto',
+         texto: 'holamundo AreaTexto collapsable en Test',
+         value: 'valorDefecto2'
+       })*/
     ]
   });
 
-  const formulario = new FormGroup({
-    [dataElemento.elementosGrupo[0].inputs.name]:
-      new FormControl(dataElemento.elementosGrupo[0].inputs.value, []),
-    [dataElemento.elementosGrupo[1].inputs.name]:
-      new FormControl(dataElemento.elementosGrupo[1].inputs.value, [])
-  });
+  // const formulario = new FormGroup({
+  //   [dataElemento.elementosGrupo[0].inputs.name]:
+  //     new FormControl(dataElemento.elementosGrupo[0].inputs.value, []),
+  //   [dataElemento.elementosGrupo[1].inputs.name]:
+  //     new FormControl(dataElemento.elementosGrupo[1].inputs.value, [])
+  // });
+  const formulario = new FormGroup({['campoVacio']: new FormControl()});
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         KcCollapsableComponent,
-        // DynamicComponent,
-        KcCampoBasicoComponent,
-        KcAreaTextoComponent,
-        ElementoFormularioComponent,
-        KcCollapsableComponent
+        DynamicComponent,
+        //KcCampoBasicoComponent,
+        //KcAreaTextoComponent,
+        ElementoFormularioComponent
       ],
 
       imports: [
@@ -73,26 +74,36 @@ describe('CollapsableComponent', () => {
       providers: [
         Injector,
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ///schemas: [NO_ERRORS_SCHEMA]
 
     });
     TestBed.overrideModule(BrowserDynamicTestingModule, {
       set: {
         entryComponents: [
-          // DynamicComponent,
-          KcCollapsableComponent,
+          //KcCollapsableComponent,
+          //DynamicComponent,
           KcCampoBasicoComponent,
-          KcAreaTextoComponent,
-          KcCollapsableComponent
-        ]
+          KcAreaTextoComponent
+        ],
+        //providers: [{ provide: ComponentFactoryResolver, useValue: TestBed.get(ComponentFactoryResolver) }]
       }
     });
+    /*TestBed.overrideComponent(DynamicComponent,{
+      set:{//TODO: HACER UN MOCK PARA DE ComponentFactoryResolver PARA QUE REGRESE LAS INSTANCIAS QUE SE QUIEREN
+        providers: [{ provide: AuthService, useClass: MockAuthService }] 
+      }
+    })*/
+    //.overrideProvider(ComponentFactoryResolver, { useValue: testFactoryResolver });
     TestBed.compileComponents();
+
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(KcCollapsableComponent);
     component = fixture.componentInstance;
     testInjector = TestBed.get(Injector);
     testFactoryResolver = TestBed.get(ComponentFactoryResolver);
-
+    componentService = fixture.debugElement.injector.get(ComponentFactoryResolver);
 
     spyOn(testInjector, 'get').and.callFake((token) => {
       switch (token) {
@@ -102,9 +113,9 @@ describe('CollapsableComponent', () => {
           return dataElemento;
       }
     });
-    spyOn(testFactoryResolver, 'resolveComponentFactory').and.callFake((componente) => {
+    /*spyOn(testFactoryResolver, 'resolveComponentFactory').and.callFake((componente) => {
       return testFactoryResolver.resolveComponentFactory(componente);
-    });
+    });*/
 
     fixture.detectChanges();
   });
@@ -112,7 +123,12 @@ describe('CollapsableComponent', () => {
   it('se crea una instancia correctamente', () => {
     expect(component).toBeTruthy();
   });
-
+  /*it('se crea una instancia correctamente con componentfactory injectado',
+    inject([ComponentFactoryResolver], (factoria: ComponentFactoryResolver) => {
+      expect(factoria).toBe(componentService);
+      //expect(component).toBeTruthy();
+    })
+  );*/
   it('las propiedades visibles se han establecido correctamente', () => {
     const componenteHtml: DebugElement = fixture.debugElement.query(By.css('.mat-accordion'));
     const tituloCollapsable = componenteHtml.query(By.css('mat-panel-title'));
