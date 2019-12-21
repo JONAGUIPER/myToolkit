@@ -12,14 +12,13 @@ export class ElementoFormularioComponent extends ElementoFormularioBase implemen
   form: FormGroup;
   elementosFormulario: Array<ElementoFormularioComponent> = new Array<ElementoFormularioComponent>();
 
-
   constructor() {
     super();
   }
 
   ngOnInit() {
-
   }
+  
   get isValid() { return this.form.controls[this.name].valid; }
   get isDirty() { return this.form.controls[this.name].dirty; }
   get errores() {

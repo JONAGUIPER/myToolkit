@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, Type } from '@angular/core';
+import { Component, OnInit, Injector, Type, Inject } from '@angular/core';
 import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
 
 @Component({
@@ -7,9 +7,10 @@ import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-
   styleUrls: ['./kc-area-texto.component.css']
 })
 export class KcAreaTextoComponent extends ElementoFormularioComponent implements OnInit {
-
-  constructor(private injector: Injector) {
+  injector: Injector;
+  constructor(@Inject(Injector) injector: Injector) {
     super();
+    this.injector = injector;
     this.tipoElemento = 'areaTexto';
   }
 
