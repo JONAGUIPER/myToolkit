@@ -10,7 +10,17 @@ import { FormDefinition } from '../kc-json-to-form/modelos/form-definition';
 export class FormularioDemoComponent implements OnInit {
 
   formDemo = this.fb.group({
-    jsonText: ['', Validators.required],
+    jsonText: [`{"elementosFormulario": [
+      {
+        "name": "campo1",
+        "tipoElemento": "campoBasico",
+        "texto": "holamundo campobasico",
+        "validaciones":[
+          {"tipoValidacion":"required"},
+          {"tipoValidacion":"email"}
+        ]
+      }
+    ]}`, Validators.required],
   });
   formDefinitionARenderizar: FormDefinition;
 

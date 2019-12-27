@@ -12,7 +12,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 
-fdescribe('KcComboComponent', async () => {
+describe('KcComboComponent', async () => {
   
   
   let componenteHtml: DebugElement;
