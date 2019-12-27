@@ -83,14 +83,6 @@ describe('KcCampoBasicoComponent', () => {
     });
     spyOn(testInjector, 'get').and.callFake((token: any) => {
       switch (token) {
-        /*case 'texto':
-          return dataElemento.texto;
-        case 'name':
-          return dataElemento.name;
-        case 'value':
-          return dataElemento.value;
-        case 'elementosGrupo':
-          return null;*/
         case 'dataElemento':
           return dataElemento;
         case 'formulario':
