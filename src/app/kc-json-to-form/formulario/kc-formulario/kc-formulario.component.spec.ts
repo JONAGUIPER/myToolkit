@@ -13,7 +13,7 @@ class MockFormGroupFactoryService extends FormGroupFactoryService {
   }
 }
 
-describe('FormularioComponent', () => {
+fdescribe('FormularioComponent', () => {
   let component: KcFormularioComponent;
   let testFormGroupFactory: FormGroupFactoryService;
   let mockFormGroupFactory: FormGroupFactoryService;
@@ -62,29 +62,6 @@ describe('FormularioComponent', () => {
     component = new KcFormularioComponent(testFormGroupFactory);
     mockFormGroupFactory = new MockFormGroupFactoryService(servicioValidaciones);
     mockComponent = new KcFormularioComponent(mockFormGroupFactory);
-    /*
-        TestBed.configureTestingModule({
-          declarations: [FormularioComponent,
-            DynamicComponent,
-            MatFormField, MatError],
-          providers: [FormGroupFactoryService]
-        });*/
-    /*TestBed.overrideComponent(
-      FormularioComponent,
-      {
-        set: {
-          providers: [{
-            provide: FormGroupFactoryService,
-            useClass: MockFormGroupFactoryService
-          }]
-        }
-      }
-    );
-    fixture = TestBed.createComponent(FormularioComponent);
-    component = fixture.componentInstance;
-    testFormGroupFactory = TestBed.get(FormGroupFactoryService);
-    //mockFormGroupFactory = fixture.debugElement.injector.get(FormGroupFactoryService);
-    fixture.detectChanges();*/
   });
 
   /*afterEach(() => {
@@ -100,17 +77,17 @@ describe('FormularioComponent', () => {
     expect(mockComponent).toBeTruthy();
   });
   it('se puede renderizar un elemento unico (campo basico)', () => {
-    component.render([
-      new ElementoFormularioDto({
-        tipoElemento: 'campoBasico',
-        name: 'campo1',
-        texto: 'holamundo campobasico',
-        validaciones: [
-          { tipoValidacion: 'required' },
-          { tipoValidacion: 'email' }
-        ]
-      })
-    ]);
+    const camposJson = `{
+    "elementosFormulario": [
+      {
+        "name": "campo1",
+        "tipoElemento": "campoBasico",
+        "texto": "holamundo campobasico",
+        "obligatorio":true
+      }]
+    }`;
+    modeloRender = JSON.parse(camposJson);
+    component.preRender(modeloRender.elementosFormulario);
     expect(component.form).toBeTruthy();
     expect(component.form.get('campo1') instanceof FormControl).toBeTruthy();
     expect(component.elementosFormulario).toBeTruthy();
@@ -118,30 +95,32 @@ describe('FormularioComponent', () => {
   });
 
   it('se puede renderizar un elemento con sub elementos (collapsable)', () => {
-    component.render([
-      new ElementoFormularioDto({
-        tipoElemento: 'collapsable',
-        name: 'miCollapsable',
-        texto: 'holamundo collapsable',
-        elementosGrupo: [
-          {
-            name: 'campo1Colapsable',
-            tipoElemento: 'campoBasico',
-            texto: 'holamundo campoBasico collapsable'
-          },
-          {
-            name: 'area1Collapsable',
-            tipoElemento: 'areaTexto',
-            texto: 'holamundo AreaTexto collapsable'
-          }
-        ]
-      })
-
-    ]);
+    const camposJson = `{
+      "elementosFormulario": [
+        {
+          "name": "mi form collapsable",
+          "tipoElemento": "collapsable",
+          "texto": "holamundo collapsable",
+          "elementosGrupo": [
+            {
+              "name": "campo1Colapsable",
+              "tipoElemento": "campoBasico",
+              "texto": "holamundo campoBasico collapsable"
+            },
+            {
+              "name": "area1Collapsable",
+              "tipoElemento": "areaTexto",
+              "texto": "holamundo AreaTexto collapsable"
+            }
+          ]
+        }
+      ]
+    }`;
+    modeloRender = JSON.parse(camposJson);
+    component.preRender(modeloRender.elementosFormulario);
     expect(component.form).toBeTruthy();
     expect(component.form.get('campo1Colapsable') instanceof FormControl).toBeTruthy();
     expect(component.elementosFormulario).toBeTruthy();
-    console.log(component.elementosFormulario[0].inputs.dataElemento);
     expect(component.elementosFormulario.length).toEqual(1);
     expect(component.elementosFormulario[0].inputs.dataElemento.elementosGrupo.length).toEqual(2);
   });

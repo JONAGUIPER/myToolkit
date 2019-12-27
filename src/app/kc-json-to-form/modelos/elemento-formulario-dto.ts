@@ -15,7 +15,7 @@ export class ElementoFormularioDto {
   get elementosGrupo() {
     return this.inputs.dataElemento.elementosGrupo;
   }
-  
+
   private getObjectComponent(componentName: string): any {
     switch (componentName) {
       case 'campoBasico':
@@ -27,7 +27,7 @@ export class ElementoFormularioDto {
       case 'combo':
         return KcComboComponent;
       default:
-        throw new Error('No ha indicado un elemento de formulario correcto');
+        throw new Error('No ha indicado un elemento de formulario correcto: (' + componentName + ')');
     }
   }
 
