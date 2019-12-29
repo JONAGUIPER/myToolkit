@@ -1,5 +1,6 @@
 import { Component, OnInit, Injector, Inject } from '@angular/core';
 import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
+import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
 
 
 @Component({
@@ -7,7 +8,7 @@ import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-
   templateUrl: './kc-campo-basico.component.html',
   styleUrls: ['./kc-campo-basico.component.css']
 })
-export class KcCampoBasicoComponent extends ElementoFormularioComponent implements OnInit {
+export class KcCampoBasicoComponent extends ElementoFormularioBase implements OnInit {
   injector: Injector;
 
   constructor(@Inject(Injector) injector: Injector) {

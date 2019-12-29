@@ -1,8 +1,30 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Validacion } from './validacion';
 import { ElementoFormularioDto } from './elemento-formulario-dto';
+import { AbstractElementoFormulario } from './abstract-elemento-formulario';
+import { ValidationErrors, FormGroup } from '@angular/forms';
+import { Injector } from '@angular/core';
 
-export class ElementoFormularioBase {
+
+export interface IElementoFormularioBase {
+    value?: any;
+    name?: string;
+    texto?: string;
+    tipoElemento?: string;
+    valorPorDefecto?: any;
+    elementosGrupo?: ElementoFormularioDto[];
+    /*
+    etiquetaAyuda?: string,
+    saltoLinea?: boolean,
+    enLinea?: boolean,
+    habilitado?: boolean,
+    */
+    // TODO: crear los modelos correspondientes
+    validaciones?: Validacion[];
+    accionesCondicionales?: any;
+    formato?: any;
+}
+export class ElementoFormularioBase extends AbstractElementoFormulario implements IElementoFormularioBase {
     value: any;
     name: string;
     texto: string;
@@ -19,45 +41,14 @@ export class ElementoFormularioBase {
     accionesCondicionales: any;
     formato: any;
 
-    constructor(options: {
-        value?: any,
-        name?: string,
-        texto?: string,
-        tipoElemento?: string,
-        valorPorDefecto?: any,
-        elementosGrupo?: ElementoFormularioDto[],
-        /*
-        etiquetaAyuda?: string,
-        saltoLinea?: boolean,
-        enLinea?: boolean,
-        habilitado?: boolean,
-        */
-        // TODO: crear los modelos correspondientes
-        validaciones?: Validacion[],
-        accionesCondicionales?: any,
-        formato?: any
+    form: FormGroup;
+    elementosFormulario: Array<ElementoFormularioBase> = new Array<ElementoFormularioBase>();
 
-    } = {}) {
+    constructor(options: IElementoFormularioBase = {}) {
+        super();
         this.populate(options);
-
     }
-
-    populate(options: {
-        value?: any;
-        name?: string;
-        texto?: string;
-        tipoElemento?: string;
-        /*
-        etiquetaAyuda?: string;
-        saltoLinea?: boolean;
-        enLinea?: boolean;
-        habilitado?: boolean;
-        */
-        valorPorDefecto?: any;
-        elementosGrupo?: ElementoFormularioDto[];
-        // TODO: crear los modelos correspondientes
-        validaciones?: Validacion[]; accionesCondicionales?: any; formato?: any;
-    }) {
+    populate<ElementoFormularioBase>(options) {
         this.value = options.value;
         this.name = options.name || '';
         this.texto = options.texto || '';
@@ -76,6 +67,24 @@ export class ElementoFormularioBase {
         // TODO: crear los modelos correspondientes
         this.validaciones = options.validaciones || null;
         this.accionesCondicionales = options.accionesCondicionales || null;
+
+        ///return this;
     }
 
+    get isValid() { return this.form.controls[this.name].valid; }
+    get isDirty() { return this.form.controls[this.name].dirty; }
+    get errores() {
+        const errores: ValidationErrors = this.form.controls[this.name].errors;
+        let erroresString = '';
+        Object.keys(errores).forEach(keyError => {
+            erroresString += /*' keyError: ' + keyError + ', err value: ' + */errores[keyError].mensaje + '\n';
+        });
+        return erroresString;
+    }
+
+    setInputs<T>(injector: Injector) {
+        this.form = injector.get<FormGroup>('formulario' as any);
+        const dataElemento = injector.get<T>('dataElemento' as any);
+        this.populate(dataElemento);
+    }
 }

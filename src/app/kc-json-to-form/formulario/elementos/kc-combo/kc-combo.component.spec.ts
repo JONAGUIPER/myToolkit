@@ -1,22 +1,17 @@
 import { async, ComponentFixture, TestBed, inject, fakeAsync, flush } from '@angular/core/testing';
 
 import { KcComboComponent } from './kc-combo.component';
-import { BrowserModule, By } from '@angular/platform-browser';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
 import { Injector, DebugElement } from '@angular/core';
-import { ValidadoresService } from 'src/app/kc-json-to-form/servicios/validadores.service';
 import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
-import { MaterialModule } from 'src/app/material/material.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 
 describe('KcComboComponent', async () => {
-  
-  
   let componenteHtml: DebugElement;
-  let testInjector: Injector;
   let overlayContainer: OverlayContainer;
   let platform: Platform;
   let overlayContainerElement: HTMLElement;
@@ -44,9 +39,7 @@ describe('KcComboComponent', async () => {
     overlayContainer.ngOnDestroy();
   });
 
-  beforeEach(() => {
 
-  });
   describe('asignacion de caracteristicas obligatorias', () => {
     let fixture: ComponentFixture<KcComboComponent>;
     let instance: KcComboComponent;

@@ -1,7 +1,6 @@
-import { Component, OnInit, Injector, Inject, AfterViewInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
-import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
-import { Observable, of } from 'rxjs';
-import { MatSelect, MatOption } from '@angular/material';
+import { Component, OnInit, Injector, Inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ElementoFormularioSeleccionable } from 'src/app/kc-json-to-form/modelos/elemento-formulario-seleccionable';
 
 
 export interface Opcion {
@@ -19,7 +18,7 @@ export interface Animal {
   styleUrls: ['./kc-combo.component.css']
 })
 
-export class KcComboComponent extends ElementoFormularioComponent implements OnInit, AfterViewInit {
+export class KcComboComponent extends ElementoFormularioSeleccionable implements OnInit {
   injector: Injector;
   opcionesObservables: Observable<Array<Opcion>>;
   opciones: Opcion[] = [];
@@ -32,10 +31,7 @@ export class KcComboComponent extends ElementoFormularioComponent implements OnI
 
   }
 
-  ngAfterViewInit(): void {
-    //throw new Error('Method not implemented.');
-  }
-
+  
   ngOnInit() {
     //todo esta propiedad hay que pasarla en el objeto principal o crear uno nuevo
 
@@ -43,16 +39,16 @@ export class KcComboComponent extends ElementoFormularioComponent implements OnI
     this.opciones.push({ value: '1', caption: 'valor1' });
     this.opciones.push({ value: '2', caption: 'valor2' });
     // Create observer object
-    const myObserver = {
-      next: x => console.log('Observer got a next value: ' + x.caption),
-      error: err => console.error('Observer got an error: ' + err),
-      complete: () => console.log('Observer got a complete notification'),
-    };
-    this.opcionesObservables = of([
-      { value: '1', caption: 'valor1' },
-      { value: '2', caption: 'valor2' }]);
-    // Execute with the observer object
-    this.opcionesObservables.subscribe(myObserver);
+    // const myObserver = {
+    //   next: x => console.log('Observer got a next value: ' + x.caption),
+    //   error: err => console.error('Observer got an error: ' + err),
+    //   complete: () => console.log('Observer got a complete notification'),
+    // };
+    // this.opcionesObservables = of([
+    //   { value: '1', caption: 'valor1' },
+    //   { value: '2', caption: 'valor2' }]);
+    // // Execute with the observer object
+    // this.opcionesObservables.subscribe(myObserver);
 
   }
 

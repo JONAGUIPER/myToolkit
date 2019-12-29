@@ -24,7 +24,7 @@ const ENTRYCOMPONENTS = [
 
 @NgModule({
   declarations: [
-    ElementoFormularioComponent,
+    //ElementoFormularioComponent,
     KcFormularioComponent,
     DynamicComponent,
     ENTRYCOMPONENTS,

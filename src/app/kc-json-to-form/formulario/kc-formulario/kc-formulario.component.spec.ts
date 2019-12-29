@@ -13,7 +13,7 @@ class MockFormGroupFactoryService extends FormGroupFactoryService {
   }
 }
 
-fdescribe('FormularioComponent', () => {
+describe('FormularioComponent', () => {
   let component: KcFormularioComponent;
   let testFormGroupFactory: FormGroupFactoryService;
   let mockFormGroupFactory: FormGroupFactoryService;

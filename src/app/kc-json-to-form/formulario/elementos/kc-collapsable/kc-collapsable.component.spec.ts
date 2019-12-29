@@ -58,7 +58,7 @@ describe('CollapsableComponent', () => {
         DynamicComponent,
         //KcCampoBasicoComponent,
         //KcAreaTextoComponent,
-        ElementoFormularioComponent
+        //ElementoFormularioComponent
       ],
 
       imports: [
