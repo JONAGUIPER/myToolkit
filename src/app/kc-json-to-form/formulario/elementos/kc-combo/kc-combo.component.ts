@@ -35,7 +35,7 @@ export class KcComboComponent extends ElementoFormularioSeleccionable implements
   ngOnInit() {
     //todo esta propiedad hay que pasarla en el objeto principal o crear uno nuevo
 
-    this.setInputs(this.injector);
+    this.setInputs<ElementoFormularioSeleccionable>(this.injector);
     this.opciones.push({ value: '1', caption: 'valor1' });
     this.opciones.push({ value: '2', caption: 'valor2' });
     // Create observer object

@@ -3,6 +3,7 @@ import { KcCampoBasicoComponent } from '../formulario/elementos/kc-campo-basico/
 import { KcAreaTextoComponent } from '../formulario/elementos/kc-areatexto/kc-area-texto.component';
 import { KcCollapsableComponent } from '../formulario/elementos/kc-collapsable/kc-collapsable.component';
 import { KcComboComponent } from '../formulario/elementos/kc-combo/kc-combo.component';
+import { ElementoFormularioSeleccionable } from './elemento-formulario-seleccionable';
 
 export class ElementoFormularioDto {
   component: any;
@@ -10,7 +11,11 @@ export class ElementoFormularioDto {
 
   constructor(datosInput: any) {
     this.component = this.getObjectComponent(datosInput.tipoElemento);
-    this.inputs = { dataElemento: new ElementoFormularioBase(datosInput) };
+    if (datosInput.tipoElemento === 'combo') {
+      this.inputs = { dataElemento: new ElementoFormularioSeleccionable(datosInput) };
+    } else {
+      this.inputs = { dataElemento: new ElementoFormularioBase(datosInput) };
+    }
   }
   get elementosGrupo() {
     return this.inputs.dataElemento.elementosGrupo;

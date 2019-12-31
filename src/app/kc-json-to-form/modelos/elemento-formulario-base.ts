@@ -82,9 +82,10 @@ export class ElementoFormularioBase extends AbstractElementoFormulario implement
         return erroresString;
     }
 
-    setInputs<T>(injector: Injector) {
+    setInputs<T>(injector: Injector): T {
         this.form = injector.get<FormGroup>('formulario' as any);
         const dataElemento = injector.get<T>('dataElemento' as any);
         this.populate(dataElemento);
+        return dataElemento;
     }
 }
