@@ -78,8 +78,8 @@ export class KcFormularioComponent implements OnInit {
     console.log(modeloRender);
     this.preRender(modeloRender.elementosFormulario);
   }
-
-  preRender(elementosFormulario: any[]=[]){
+// TODO: esto hay que integrarlo dentro del metodo render
+  preRender(elementosFormulario: any[] = []) {
     const elementos: ElementoFormularioDto[] = [];
     elementosFormulario.forEach((element: any) => {
       elementos.push(new ElementoFormularioDto(element));

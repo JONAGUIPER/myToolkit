@@ -9,8 +9,10 @@ import { Injector, DebugElement } from '@angular/core';
 import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
+import { ElementoFormularioSeleccionable } from 'src/app/kc-json-to-form/modelos/elemento-formulario-seleccionable';
+import { IdiomasEnum } from 'src/app/kc-json-to-form/enumeradores/idiomas-enum.enum';
 
-describe('KcComboComponent', async () => {
+fdescribe('KcComboComponent', async () => {
   let componenteHtml: DebugElement;
   let overlayContainer: OverlayContainer;
   let platform: Platform;
@@ -43,10 +45,28 @@ describe('KcComboComponent', async () => {
   describe('asignacion de caracteristicas obligatorias', () => {
     let fixture: ComponentFixture<KcComboComponent>;
     let instance: KcComboComponent;
-    let dataElemento = new ElementoFormularioBase({
+    let dataElemento = new ElementoFormularioSeleccionable({
       name: 'comboTest',
       texto: 'label del comboTest',
-      value: ''
+      value: '',
+      cargarValores: {
+        valoresFijos: [
+          {
+            value: '1',
+            texto: [
+              { idioma: 'ES', value: 'hola español' },
+              { idioma: 'EN', value: 'hola inglés' }
+
+            ]
+          },
+          {
+            value: '2',
+            texto: [
+              { idioma: 'ES', value: 'adios español' }
+              { idioma: 'EN', value: 'adios inglés' }
+            ]
+          }]
+      }
     });
     let formulario = new FormGroup({
       [dataElemento.name]: new FormControl(dataElemento.value, [])
