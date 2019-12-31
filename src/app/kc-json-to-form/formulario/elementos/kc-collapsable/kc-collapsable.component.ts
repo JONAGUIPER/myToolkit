@@ -1,5 +1,4 @@
 import { Component, OnInit, Injector, Inject, ComponentFactoryResolver, Host } from '@angular/core';
-import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
 import { DynamicComponent } from '../../dynamic/dynamic.component';
 import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
 

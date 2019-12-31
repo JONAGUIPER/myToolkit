@@ -10,9 +10,8 @@ import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 import { ElementoFormularioSeleccionable } from 'src/app/kc-json-to-form/modelos/elemento-formulario-seleccionable';
-import { IdiomasEnum } from 'src/app/kc-json-to-form/enumeradores/idiomas-enum.enum';
 
-fdescribe('KcComboComponent', async () => {
+describe('KcComboComponent', async () => {
   let componenteHtml: DebugElement;
   let overlayContainer: OverlayContainer;
   let platform: Platform;
@@ -62,7 +61,7 @@ fdescribe('KcComboComponent', async () => {
           {
             value: '2',
             texto: [
-              { idioma: 'ES', value: 'adios español' }
+              { idioma: 'ES', value: 'adios español' },
               { idioma: 'EN', value: 'adios inglés' }
             ]
           }]

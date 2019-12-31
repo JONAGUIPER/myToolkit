@@ -1,7 +1,6 @@
 import { ElementoFormularioBase, IElementoFormularioBase } from './elemento-formulario-base';
 import { Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IdiomasEnum, idiomas } from '../enumeradores/idiomas-enum.enum';
 import { CargarValores } from './interfaces';
 
 

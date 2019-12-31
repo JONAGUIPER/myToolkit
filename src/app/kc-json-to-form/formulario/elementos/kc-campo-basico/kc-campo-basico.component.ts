@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector, Inject } from '@angular/core';
-import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
+// import {  } from '../../elemento-formulario/elemento-formulario.component';
 import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
 
 
