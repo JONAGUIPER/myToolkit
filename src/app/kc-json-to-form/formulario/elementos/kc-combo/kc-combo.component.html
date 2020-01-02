@@ -6,9 +6,9 @@
         <mat-option *ngFor="let opcion of (opciones)" [value]="opcion.value">
             {{opcion.caption}}
         </mat-option>
-        <!-- <mat-option *ngFor="let opcion of (opciones | async)" [value]="opcion">
+        <mat-option *ngFor="let opcion of (opciones$ | async)" [value]="opcion">
             {{opcion.caption}}
-        </mat-option> -->
+        </mat-option>
         <!-- <ng-container *ngIf="options !== null && options.length && ((isOpen && !isLoading) || (!selectControl.panelOpen && selected.value !== null)); else loading"> -->
         <!-- <ng-container
             *ngIf="(opciones !== null 

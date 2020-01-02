@@ -11,7 +11,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
 import { ElementoFormularioSeleccionable } from 'src/app/kc-json-to-form/modelos/elemento-formulario-seleccionable';
 
-describe('KcComboComponent', async () => {
+fdescribe('KcComboComponent', async () => {
   let componenteHtml: DebugElement;
   let overlayContainer: OverlayContainer;
   let platform: Platform;
@@ -53,16 +53,16 @@ describe('KcComboComponent', async () => {
           {
             value: '1',
             texto: [
-              { idioma: 'ES', value: 'hola español' },
-              { idioma: 'EN', value: 'hola inglés' }
+              { idioma: 'es', value: 'hola español' },
+              { idioma: 'en', value: 'hola inglés' }
 
             ]
           },
           {
             value: '2',
             texto: [
-              { idioma: 'ES', value: 'adios español' },
-              { idioma: 'EN', value: 'adios inglés' }
+              { idioma: 'es', value: 'adios español' },
+              { idioma: 'en', value: 'adios inglés' }
             ]
           }]
       }
@@ -111,6 +111,7 @@ describe('KcComboComponent', async () => {
       // instance = fixture.componentInstance;
       // expect(instance.form.get('comboTest').value)
       //     .toEqual(null, `Expected the control's value to be empty initially.`);
+      instance.ngOnInit();
       fixture.detectChanges();
       flush();
       const trigger = fixture.debugElement.query(By.css('.mat-select-trigger'))!.nativeElement;

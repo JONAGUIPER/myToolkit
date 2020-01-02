@@ -15,6 +15,7 @@ export class ElementoFormularioSeleccionable extends ElementoFormularioBase {
         this.cargarValores = options.cargarValores;
     }
     setInputs<ElementoFormularioSeleccionable>(injector: Injector): ElementoFormularioSeleccionable {
+        //TODO: esto al parecer no es necesario ya al usar la interfaz se obtienen los datos 164solo llamar al padre para setear el formulario
         const dataElemento: ElementoFormularioSeleccionable = super.setInputs<ElementoFormularioSeleccionable>(injector);
         this.populate(dataElemento);
         return dataElemento;

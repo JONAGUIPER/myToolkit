@@ -23,3 +23,8 @@ export interface CargarValores {
     valoresFijos?: ValorFijo[];
     service?: Service;
 }
+
+export interface Opcion {
+    value: string;
+    caption: string;
+  }
