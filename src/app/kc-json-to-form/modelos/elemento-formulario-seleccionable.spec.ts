@@ -1,6 +1,6 @@
 import { ElementoFormularioSeleccionable } from './elemento-formulario-seleccionable';
 
-describe('ElementoFormulariSeleccionable', () => {
+describe('ElementoFormularioSeleccionable', () => {
   it('se crea una instancia vacia', () => {
     const elementoSeleccionable = new ElementoFormularioSeleccionable();
     expect(elementoSeleccionable).toBeTruthy();
@@ -15,10 +15,10 @@ describe('ElementoFormulariSeleccionable', () => {
           servicio: {
             operation: 'buscarID',
             method: 'GET',
-            osbService: 'creoOpcional'
+            url: 'urlDelServicio'
           },
           parametros: [
-            { nombreCampo: 'campoParametro1' }
+            { nombreParametro: 'parametroWS', nombreCampo: 'campoParametro1' }
           ]
         },
       }

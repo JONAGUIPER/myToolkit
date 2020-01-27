@@ -4,12 +4,6 @@ import { ElementoFormularioSeleccionable } from 'src/app/kc-json-to-form/modelos
 import { Opcion } from 'src/app/kc-json-to-form/modelos/interfaces';
 import { CargarValoresService } from 'src/app/kc-json-to-form/servicios/cargar-valores.service';
 
-
-
-export interface Animal {
-  name: string;
-  sound: string;
-}
 @Component({
   selector: 'kc-combo',
   templateUrl: './kc-combo.component.html',
@@ -22,7 +16,7 @@ export class KcComboComponent extends ElementoFormularioSeleccionable implements
   cargarValoresService: CargarValoresService;
 
 
-  constructor(@Inject(Injector) injector: Injector, cargaValoresService: CargarValoresService) {
+  constructor(@Inject(Injector) injector: Injector, private cargaValoresService: CargarValoresService) {
     super();
     this.injector = injector;
     this.tipoElemento = 'combo';
@@ -36,12 +30,17 @@ export class KcComboComponent extends ElementoFormularioSeleccionable implements
     this.setInputs<ElementoFormularioSeleccionable>(this.injector);
     this.cargarValoresService
       .execute(this.cargarValores)
-      .subscribe((valores) => {
-        this.opciones.length = 0;
-        valores.forEach((valor) => {
-          this.opciones.push(valor);
-        });
-    });
+      .subscribe({
+        next: (valores) => {
+          this.opciones.length = 0;
+          valores.forEach((valor) => {
+            this.opciones.push(valor);
+          });
+        },
+        error: (error: any) => {
+          this.opciones = [];
+        }
+      });
     // this.opciones.push({ value: '1', caption: 'valor1' });
     // this.opciones.push({ value: '2', caption: 'valor2' });
     // Create observer object

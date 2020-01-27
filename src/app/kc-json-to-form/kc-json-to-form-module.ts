@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../material/material.module';
 import { ValidadoresService } from './servicios/validadores.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LogServices } from './Interceptors/error-interceptor';
 
 
 
@@ -32,12 +34,18 @@ const ENTRYCOMPONENTS = [
     BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MaterialModule
   ],
   exports: [
     KcFormularioComponent
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS,
+      useClass: LogServices,
+      multi: true
+    }
+  ],
   entryComponents: [ENTRYCOMPONENTS]
 })
 export class KcJsonToFormModule { }

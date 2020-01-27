@@ -2,29 +2,30 @@ export interface I18n {
     idioma: string;
     value: string;
 }
-export interface ValorFijo {
+export interface ValorFijoSeleccionable {
     value: string;
     texto?: I18n[];
 }
 export interface ParametroWS {
+    nombreParametro: string;
     nombreCampo?: string;
-    valorFijo?: ValorFijo;
+    valorFijo?: string;
 }
 export interface Servicio {
-    osbService: string;
+    url: string;
     operation: string;
-    method: string;
 }
 export interface Service {
-    parametros: ParametroWS[];
+    parametros?: ParametroWS[];
     servicio: Servicio;
+    respuesta?: Opcion;
 }
 export interface CargarValores {
-    valoresFijos?: ValorFijo[];
+    valoresFijos?: ValorFijoSeleccionable[];
     service?: Service;
 }
 
 export interface Opcion {
     value: string;
     caption: string;
-  }
+}

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { CargarValores, Opcion, ValorFijo, Service } from '../modelos/interfaces';
-import { Observable, Subject, of } from 'rxjs';
+import { CargarValores, Opcion, ValorFijoSeleccionable, Service, ParametroWS } from '../modelos/interfaces';
+import { Observable, of, ObservableInput, throwError } from 'rxjs';
+import { map, catchError, retry } from 'rxjs/operators';
 import { Idiomas } from '../enumeradores/idiomas.enum';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CargarValoresService {
-
-
-  constructor() { }
+  constructor(private clienteHttp: HttpClient) { }
 
   execute(definicion: CargarValores): Observable<Opcion[]> {
     if (definicion.valoresFijos) {
@@ -20,7 +20,8 @@ export class CargarValoresService {
       throw new Error('se debe establecer una manera de obtener los datos');
     }
   }
-  private obtenerValoresFijos(valoresFijos: ValorFijo[]): Observable<Opcion[]> {
+
+  private obtenerValoresFijos(valoresFijos: ValorFijoSeleccionable[]): Observable<Opcion[]> {
     const opciones: Opcion[] = [];
     if (valoresFijos.length > 0) {
       valoresFijos.forEach((valorFijo) => {
@@ -38,20 +39,62 @@ export class CargarValoresService {
     }
     return of(opciones).pipe();
   }
+
   private obtenerValoresService(servicio: Service): Observable<Opcion[]> {
-
-    return null;
+    const parametros: HttpParams = this.obtenerParametrosServicio(servicio.parametros);
+    let respuestaWS;
+    try {
+      respuestaWS = this.clienteHttp
+        .get<Opcion[]>(servicio.servicio.url + servicio.servicio.operation, { params: parametros });
+      // respuestaWS.subscribe(
+      //     res => { console.log('respuesta correcta: ' + res); },
+      //     (error: HttpErrorResponse) => {
+      //       console.log('respuesta error: ' + error);
+      //     }
+      //   );
+    } catch (error) {
+      console.log('ESTOY EN EL CATCH');
+    }
+    // return respuestaWS;
+    return this.tratarRespuesta(respuestaWS, servicio.respuesta);
   }
-}
-// Tu subject deberia ser privado, asi proteges su funcionalidad.
-const sub = new Subject<boolean>();
 
-// Tu funcion para solicitar el cambio
-function mostrarComponentes(mostrar: boolean = true): void {
-  sub.next(mostrar);
-}
+  private tratarRespuesta(respuestaWS: Observable<any>, parseoRespuesta: Opcion): Observable<Opcion[]> {
+    const respuestaParseada: Observable<any> = respuestaWS.pipe(
+      catchError((error: ObservableInput<any>) => {
+        return throwError(error);
+        //return of([]);
+      }),
+      map(items => {
+        let resp: Opcion[] = [];
+        if (items.length !== 0) {
+          if (parseoRespuesta) {
+            items.map((item: any) => {
+              resp.push({ value: item.id, caption: item.name });
+            });
+          } else {
+            resp = items;
+          }
+        }
+        return resp;
+      })
 
-// Tu observable, el cual se puede exponer y extender con otros operadores
-function mostrarComponentesObs(): Observable<boolean> {
-  return sub.asObservable();
+    );
+    return respuestaParseada;
+  }
+
+
+  private obtenerParametrosServicio(parametros: ParametroWS[]): HttpParams {
+    const parametrosParaUsar: HttpParams = new HttpParams();
+    parametros.map((parametro) => {
+      if (parametro.valorFijo) {
+        parametrosParaUsar.set(parametro.nombreParametro, parametro.valorFijo);
+      } else if (parametro.nombreCampo) {
+        parametrosParaUsar.set(parametro.nombreParametro, parametro.nombreCampo);
+      } else {
+        throw new Error('no se ha informado un parametro');
+      }
+    });
+    return parametrosParaUsar;
+  }
 }
