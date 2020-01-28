@@ -1,1 +1,33 @@
-<p>kc-combo works!</p>
+<!-- <div [formGroup]="form"> -->
+<mat-form-field [formGroup]="form">
+    <mat-label>{{texto}}</mat-label>
+    <mat-select [formControlName]="name" [id]="name">
+        <mat-option value="">--ElementoFormularioBase</mat-option>
+        <mat-option *ngFor="let opcion of (opciones)" [value]="opcion.value">
+            {{opcion.caption}}
+        </mat-option>
+        <mat-option *ngFor="let opcion of (opciones$ | async)" [value]="opcion">
+            {{opcion.caption}}
+        </mat-option>
+        <!-- <ng-container *ngIf="options !== null && options.length && ((isOpen && !isLoading) || (!selectControl.panelOpen && selected.value !== null)); else loading"> -->
+        <!-- <ng-container
+            *ngIf="(opciones !== null 
+            && opciones !== undefined 
+            && opciones.length  | async); else loading">
+            <mat-option *ngFor="let opcion of opciones" [value]="opcion.value">
+                {{option.caption}}
+            </mat-option>
+        </ng-container>
+        <ng-template #loading>
+            <mat-option disabled>
+                <div class="container">
+                    <span>Loading...</span>
+                    <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                </div>
+            </mat-option>
+        </ng-template> -->
+    </mat-select>
+    <mat-error *ngIf="!isValid">{{errores}}</mat-error>
+</mat-form-field>
+<!-- </div> -->
+<!-- <div *ngFor="let opcion of (opciones | async)">{{opcion.value}} -  {{opcion.caption}}</div> -->

@@ -13,7 +13,6 @@ import { KcAreaTextoComponent } from '../kc-areatexto/kc-area-texto.component';
 import { KcCampoBasicoComponent } from '../kc-campo-basico/kc-campo-basico.component';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
-import { ElementoFormularioComponent } from '../../elemento-formulario/elemento-formulario.component';
 
 // TODO: seguir investigando y si es necesario testear que se rendericen los elementos del grupo
 describe('CollapsableComponent', () => {
@@ -58,7 +57,6 @@ describe('CollapsableComponent', () => {
         DynamicComponent,
         //KcCampoBasicoComponent,
         //KcAreaTextoComponent,
-        ElementoFormularioComponent
       ],
 
       imports: [

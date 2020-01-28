@@ -48,3 +48,6 @@ Thumbs.db
 
 #MIS IGNORES
 esquemas/*
+src/app/kc-json-to-form/formulario/elementos/kc-combo/comboMODELTEST.ts
+src/app/kc-json-to-form/formulario/elementos/kc-combo/comboTEST.ts
+/node_modulesborrame

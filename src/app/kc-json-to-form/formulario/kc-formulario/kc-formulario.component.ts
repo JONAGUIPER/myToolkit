@@ -15,7 +15,7 @@ export class KcFormularioComponent implements OnInit {
   @Input() set formDefinition(definicionFormulario: FormDefinition) {
     if (definicionFormulario) {
       this.idForm = definicionFormulario.name;
-      this.render(definicionFormulario.elementosFormulario);
+      this.preRender(definicionFormulario.elementosFormulario);
     }
 
   }
@@ -76,27 +76,29 @@ export class KcFormularioComponent implements OnInit {
     }`;
     const modeloRender = JSON.parse(camposJson);
     console.log(modeloRender);
-    modeloRender.elementosFormulario.forEach((element: any) => {
+    this.preRender(modeloRender.elementosFormulario);
+  }
+// TODO: esto hay que integrarlo dentro del metodo render
+  preRender(elementosFormulario: any[] = []) {
+    const elementos: ElementoFormularioDto[] = [];
+    elementosFormulario.forEach((element: any) => {
+      elementos.push(new ElementoFormularioDto(element));
       console.log(element);
     });
-    this.render(modeloRender.elementosFormulario);
+    this.render(elementos);
   }
-
   render(camposJson: ElementoFormularioDto[] = []) {
     this.elementosFormulario.length = 0;
     camposJson.forEach(elementoFormularioJSON => {
       let elementoFormulario: ElementoFormularioDto;
       if (elementoFormularioJSON.elementosGrupo) {
-        elementoFormulario = new ElementoFormularioDto(elementoFormularioJSON);
-        elementoFormulario.inputs.dataElemento.elementosGrupo = this.crearElementosGrupo(elementoFormularioJSON.elementosGrupo);
-      } else {
-        elementoFormulario = elementoFormularioJSON;
+        elementoFormularioJSON.inputs.dataElemento.elementosGrupo =
+          this.crearElementosGrupo(elementoFormularioJSON.inputs.dataElemento.elementosGrupo);
       }
+      elementoFormulario = elementoFormularioJSON;
       this.elementosFormulario.push(elementoFormulario);
     });
     this.form = this.formGroupfactory.toFormGroup(this.elementosFormulario);
-    //this.formData = JSON.stringify(this.form.value);
-
   }
 
   private crearElementosGrupo(elementosGrupo: any[], ) {

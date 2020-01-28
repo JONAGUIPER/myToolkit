@@ -9,7 +9,6 @@ import { environment } from '../environments/environment';
 
 // mis componentes
 
-import { ElementoFormularioComponent } from './kc-json-to-form/formulario/elemento-formulario/elemento-formulario.component';
 import { KcFormularioComponent } from './kc-json-to-form/formulario/kc-formulario/kc-formulario.component';
 import { DynamicComponent } from './kc-json-to-form/formulario/dynamic/dynamic.component';
 import { KcCampoBasicoComponent } from './kc-json-to-form/formulario/elementos/kc-campo-basico/kc-campo-basico.component';
