@@ -4,12 +4,12 @@ import { Opcion } from 'src/app/kc-json-to-form/modelos/interfaces';
 import { CargarValoresService } from 'src/app/kc-json-to-form/servicios/cargar-valores.service';
 
 @Component({
-  selector: 'kc-combo',
-  templateUrl: './kc-combo.component.html',
-  styleUrls: ['./kc-combo.component.css']
+  selector: 'kc-radio',
+  templateUrl: './kc-radio.component.html',
+  styleUrls: ['./kc-radio.component.css']
 })
+export class KcRadioComponent extends ElementoFormularioSeleccionable implements OnInit {
 
-export class KcComboComponent extends ElementoFormularioSeleccionable implements OnInit {
   injector: Injector;
   opciones: Opcion[] = [];
   cargarValoresService: CargarValoresService;
@@ -18,14 +18,10 @@ export class KcComboComponent extends ElementoFormularioSeleccionable implements
   constructor(@Inject(Injector) injector: Injector, private cargaValoresService: CargarValoresService) {
     super();
     this.injector = injector;
-    this.tipoElemento = 'combo';
+    this.tipoElemento = 'radio';
     this.cargarValoresService = cargaValoresService;
   }
-
-
   ngOnInit() {
-    //todo esta propiedad hay que pasarla en el objeto principal o crear uno nuevo
-
     this.setInputs<ElementoFormularioSeleccionable>(this.injector);
     this.cargarValoresService
       .execute(this.cargarValores)
@@ -41,5 +37,5 @@ export class KcComboComponent extends ElementoFormularioSeleccionable implements
         }
       });
   }
-}
 
+}

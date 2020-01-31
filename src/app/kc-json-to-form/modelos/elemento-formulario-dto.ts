@@ -4,6 +4,7 @@ import { KcAreaTextoComponent } from '../formulario/elementos/kc-areatexto/kc-ar
 import { KcCollapsableComponent } from '../formulario/elementos/kc-collapsable/kc-collapsable.component';
 import { KcComboComponent } from '../formulario/elementos/kc-combo/kc-combo.component';
 import { ElementoFormularioSeleccionable } from './elemento-formulario-seleccionable';
+import { KcRadioComponent } from '../formulario/elementos/kc-radio/kc-radio.component';
 
 export class ElementoFormularioDto {
   component: any;
@@ -31,6 +32,8 @@ export class ElementoFormularioDto {
         return KcCollapsableComponent;
       case 'combo':
         return KcComboComponent;
+      case 'radio':
+        return KcRadioComponent;
       default:
         throw new Error('No ha indicado un elemento de formulario correcto: (' + componentName + ')');
     }

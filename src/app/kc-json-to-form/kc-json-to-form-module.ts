@@ -5,6 +5,7 @@ import { KcAreaTextoComponent } from './formulario/elementos/kc-areatexto/kc-are
 import { KcCollapsableComponent } from './formulario/elementos/kc-collapsable/kc-collapsable.component';
 import { KcComboComponent } from './formulario/elementos/kc-combo/kc-combo.component';
 import { KcFormularioComponent } from './formulario/kc-formulario/kc-formulario.component';
+import { KcRadioComponent } from './formulario/elementos/kc-radio/kc-radio.component';
 import { DynamicComponent } from './formulario/dynamic/dynamic.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +21,8 @@ const ENTRYCOMPONENTS = [
   KcCampoBasicoComponent,
   KcAreaTextoComponent,
   KcCollapsableComponent,
-  KcComboComponent
+  KcComboComponent,
+  KcRadioComponent
 ];
 
 @NgModule({

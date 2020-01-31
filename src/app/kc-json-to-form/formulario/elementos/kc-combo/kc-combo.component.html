@@ -2,7 +2,7 @@
 <mat-form-field [formGroup]="form">
     <mat-label>{{texto}}</mat-label>
     <mat-select [formControlName]="name" [id]="name">
-        <mat-option value="">--ElementoFormularioBase</mat-option>
+        <mat-option value="">SELECCIONE UNA OPCION</mat-option>
         <mat-option *ngFor="let opcion of (opciones)" [value]="opcion.value">
             {{opcion.caption}}
         </mat-option>

@@ -1,7 +1,7 @@
 import { ElementoFormularioBase, IElementoFormularioBase } from './elemento-formulario-base';
 import { Injector } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CargarValores } from './interfaces';
+import { CargarValores, Opcion } from './interfaces';
 
 
 export interface IElementoFormularioSeleccionable extends IElementoFormularioBase {
@@ -9,6 +9,7 @@ export interface IElementoFormularioSeleccionable extends IElementoFormularioBas
 }
 export class ElementoFormularioSeleccionable extends ElementoFormularioBase {
     cargarValores: CargarValores;
+
 
     constructor(options: IElementoFormularioSeleccionable = { cargarValores: {} }) {
         super(options);
@@ -24,4 +25,5 @@ export class ElementoFormularioSeleccionable extends ElementoFormularioBase {
         super.populate(options);
         this.cargarValores = options.cargarValores;
     }
+
 }
