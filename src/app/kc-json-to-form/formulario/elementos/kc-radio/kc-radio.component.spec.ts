@@ -1,22 +1,21 @@
 import { async, ComponentFixture, TestBed, inject, fakeAsync, flush } from '@angular/core/testing';
 
-import { KcComboComponent } from './kc-combo.component';
-import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { MatFormFieldModule, MatSelectModule } from '@angular/material';
-import { Injector, DebugElement } from '@angular/core';
-import { ElementoFormularioBase } from 'src/app/kc-json-to-form/modelos/elemento-formulario-base';
+import { KcRadioComponent } from './kc-radio.component';
+import { DebugElement } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
-import { ElementoFormularioSeleccionable } from 'src/app/kc-json-to-form/modelos/elemento-formulario-seleccionable';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatFormFieldModule, MatSelectModule, MatRadioModule } from '@angular/material';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { CargarValoresService } from 'src/app/kc-json-to-form/servicios/cargar-valores.service';
-import { Opcion } from 'src/app/kc-json-to-form/modelos/interfaces';
+import { ElementoFormularioSeleccionable } from 'src/app/kc-json-to-form/modelos/elemento-formulario-seleccionable';
+import { By } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LogServicesInterceptor } from 'src/app/kc-json-to-form/Interceptors/log-services-interceptor';
+import { Opcion } from 'src/app/kc-json-to-form/modelos/interfaces';
+import { CargarValoresService } from 'src/app/kc-json-to-form/servicios/cargar-valores.service';
 
-describe('KcComboComponent', async () => {
+describe('KcRadioComponent', async () => {
   let componenteHtml: DebugElement;
   let overlayContainer: OverlayContainer;
   let platform: Platform;
@@ -26,7 +25,7 @@ describe('KcComboComponent', async () => {
     TestBed.configureTestingModule({
       imports: [
         MatFormFieldModule,
-        MatSelectModule,
+        MatRadioModule,
         ReactiveFormsModule,
         FormsModule,
         NoopAnimationsModule,
@@ -49,12 +48,13 @@ describe('KcComboComponent', async () => {
 
 
   describe('asignacion de caracteristicas obligatorias', () => {
-    let fixture: ComponentFixture<KcComboComponent>;
-    let instance: KcComboComponent;
+    let fixture: ComponentFixture<KcRadioComponent>;
+    let instance: KcRadioComponent;
     const dataElemento = new ElementoFormularioSeleccionable({
-      name: 'comboTest',
-      texto: 'label del comboTest',
+      name: 'radioTest',
+      texto: 'label del radioTest',
       value: '',
+      tipoElemento: 'radio',
       cargarValores: {
         valoresFijos: [
           {
@@ -84,18 +84,15 @@ describe('KcComboComponent', async () => {
 
     beforeEach(
       async(() => {
-        configureMatSelectTestingModule([KcComboComponent], providers);
-        fixture = TestBed.createComponent(KcComboComponent);
+        configureMatSelectTestingModule([KcRadioComponent], providers);
+        fixture = TestBed.createComponent(KcRadioComponent);
         instance = fixture.componentInstance;
       }));
 
     it('asignacion del texto del label', fakeAsync(() => {
-      // fixture = TestBed.createComponent(KcComboComponent);
-      // instance = fixture.componentInstance;
-
       instance.ngOnInit();
       fixture.detectChanges();
-      componenteHtml = fixture.debugElement.query(By.css('.mat-form-field'));
+      componenteHtml = fixture.debugElement.query(By.css('div'));
       const label = componenteHtml.query(By.css('label'));
       expect(label).toBeTruthy();
       expect(label.nativeElement.innerText).toEqual(dataElemento.texto);
@@ -105,7 +102,7 @@ describe('KcComboComponent', async () => {
       instance.ngOnInit();
       fixture.detectChanges();
       flush();
-      componenteHtml = fixture.debugElement.query(By.css('.mat-form-field'));
+      componenteHtml = fixture.debugElement.query(By.css('div'));
       const input = componenteHtml.query(By.css('#' + dataElemento.name));
       expect(input).toBeTruthy();
     }));
@@ -114,26 +111,26 @@ describe('KcComboComponent', async () => {
       instance.ngOnInit();
       fixture.detectChanges();
       flush();
-      const trigger = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
-      trigger.click();
+      const triggers = fixture.debugElement.queryAll(By.css('.mat-radio-container'));
+      triggers[0].nativeElement.click();
       fixture.detectChanges();
       flush();
-      const option = overlayContainerElement.querySelectorAll('mat-option') as NodeListOf<HTMLElement>;
-      option[1].click();
+      expect(instance.form.value[dataElemento.name]).toEqual(dataElemento.cargarValores.valoresFijos[0].value);
+      triggers[1].nativeElement.click();
       fixture.detectChanges();
       flush();
-
-      expect(instance.form.value[dataElemento.name]).toEqual('1');
+      expect(instance.form.value[dataElemento.name]).toEqual(dataElemento.cargarValores.valoresFijos[1].value);
     }));
   });
 
   describe('cargar opciones mediante servicios web', () => {
-    let fixture: ComponentFixture<KcComboComponent>;
-    let instance: KcComboComponent;
+    let fixture: ComponentFixture<KcRadioComponent>;
+    let instance: KcRadioComponent;
     const dataElemento = new ElementoFormularioSeleccionable({
-      name: 'comboTest',
-      texto: 'label del comboTest',
+      name: 'radioTest',
+      texto: 'label del radioTest',
       value: '',
+      tipoElemento: 'radio',
       cargarValores: {
         service: {
           servicio: {
@@ -175,8 +172,8 @@ describe('KcComboComponent', async () => {
 
     beforeEach(
       async(() => {
-        configureMatSelectTestingModule([KcComboComponent], providers, importaciones);
-        fixture = TestBed.createComponent(KcComboComponent);
+        configureMatSelectTestingModule([KcRadioComponent], providers, importaciones);
+        fixture = TestBed.createComponent(KcRadioComponent);
         instance = fixture.componentInstance;
       }));
 
@@ -190,8 +187,8 @@ describe('KcComboComponent', async () => {
         dataElemento.cargarValores.service.servicio.operation);
       expect(request[0].request.method).toBe('GET');
       request[0].flush(valoresRetorno);
-
-      componenteHtml = fixture.debugElement.query(By.css('.mat-form-field'));
+      fixture.detectChanges();
+      componenteHtml = fixture.debugElement.query(By.css('div'));
       const label = componenteHtml.query(By.css('label'));
       expect(label).toBeTruthy();
       expect(label.nativeElement.innerText).toEqual(dataElemento.texto);
@@ -208,22 +205,14 @@ describe('KcComboComponent', async () => {
       expect(request[0].request.method).toBe('GET');
       request[0].flush(valoresRetorno);
       flush();
-      const trigger = fixture.debugElement.query(By.css('.mat-select-trigger')).nativeElement;
-      trigger.click();
+      fixture.detectChanges();
+      const triggers = fixture.debugElement.queryAll(By.css('.mat-radio-container'));
+      triggers[0].nativeElement.click();
       fixture.detectChanges();
       flush();
-      const options = overlayContainerElement.querySelectorAll('mat-option') as NodeListOf<HTMLElement>;
-      options[indexOpcionSelected].click();
-      fixture.detectChanges();
-      flush();
-
       expect(instance.form.value[dataElemento.name]).toEqual(valoresRetorno[indexOpcionSelected - 1].value);
-      options.forEach((option, index) => {
-        if (index > 0) {
-          expect(option.innerText.trim()).toEqual(valoresRetorno[index - 1].caption);
-        }
-      });
+
     }));
+
   });
 });
-

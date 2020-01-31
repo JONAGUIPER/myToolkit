@@ -22,6 +22,7 @@ import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
 import { MaterialModule } from './material/material.module';
 import { KcJsonToFormModule } from './kc-json-to-form/kc-json-to-form-module';
 import { FormularioDemoComponent } from './formulario-demo/formulario-demo.component';
+import { KcRadioComponent } from './kc-json-to-form/formulario/elementos/kc-radio/kc-radio.component';
 
 const ENTRYCOMPONENTS = [
   KcCampoBasicoComponent,
@@ -35,6 +36,7 @@ const ENTRYCOMPONENTS = [
     AppComponent,
     KcSideBarComponent,
     FormularioDemoComponent,
+    KcRadioComponent,
   ],
   imports: [
     BrowserModule,

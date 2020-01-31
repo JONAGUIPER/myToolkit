@@ -1,0 +1,9 @@
+<div [formGroup]="form">
+    <label id="{{name}}-label" for="{{name}}">{{texto}}</label>
+    <mat-radio-group [formControlName]="name" [id]="name">
+        <mat-radio-button *ngFor="let opcion of (opciones)" [value]="opcion.value">
+            {{opcion.caption}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf="!isValid">{{errores}}</mat-error>
+</div>
