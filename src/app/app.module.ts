@@ -8,27 +8,26 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 // mis componentes
-
-import { KcFormularioComponent } from './kc-json-to-form/formulario/kc-formulario/kc-formulario.component';
-import { DynamicComponent } from './kc-json-to-form/formulario/dynamic/dynamic.component';
 import { KcCampoBasicoComponent } from './kc-json-to-form/formulario/elementos/kc-campo-basico/kc-campo-basico.component';
 import { KcAreaTextoComponent } from './kc-json-to-form/formulario/elementos/kc-areatexto/kc-area-texto.component';
 import { KcCollapsableComponent } from './kc-json-to-form/formulario/elementos/kc-collapsable/kc-collapsable.component';
-import { ValidadoresService } from './kc-json-to-form/servicios/validadores.service';
 import { KcComboComponent } from './kc-json-to-form/formulario/elementos/kc-combo/kc-combo.component';
+import { KcRadioComponent } from './kc-json-to-form/formulario/elementos/kc-radio/kc-radio.component';
+import { KcCheckboxComponent } from './kc-json-to-form/formulario/elementos/kc-checkbox/kc-checkbox.component';
+import { KcJsonToFormModule } from './kc-json-to-form/kc-json-to-form-module';
 
-import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
 // MATERIAL
 import { MaterialModule } from './material/material.module';
-import { KcJsonToFormModule } from './kc-json-to-form/kc-json-to-form-module';
+import { KcSideBarComponent } from './kc-side-bar/kc-side-bar.component';
 import { FormularioDemoComponent } from './formulario-demo/formulario-demo.component';
-import { KcRadioComponent } from './kc-json-to-form/formulario/elementos/kc-radio/kc-radio.component';
 
 const ENTRYCOMPONENTS = [
   KcCampoBasicoComponent,
   KcAreaTextoComponent,
   KcCollapsableComponent,
-  KcComboComponent
+  KcComboComponent,
+  KcRadioComponent,
+  KcCheckboxComponent
 ];
 
 @NgModule({
@@ -36,7 +35,6 @@ const ENTRYCOMPONENTS = [
     AppComponent,
     KcSideBarComponent,
     FormularioDemoComponent,
-    KcRadioComponent,
   ],
   imports: [
     BrowserModule,
