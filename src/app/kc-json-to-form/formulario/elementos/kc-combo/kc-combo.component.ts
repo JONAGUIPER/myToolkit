@@ -11,8 +11,7 @@ import { CargarValoresService } from 'src/app/kc-json-to-form/servicios/cargar-v
 
 export class KcComboComponent extends ElementoFormularioSeleccionable implements OnInit {
   injector: Injector;
-  opciones: Opcion[] = [];
-  cargarValoresService: CargarValoresService;
+
 
 
   constructor(@Inject(Injector) injector: Injector, private cargaValoresService: CargarValoresService) {
@@ -22,24 +21,10 @@ export class KcComboComponent extends ElementoFormularioSeleccionable implements
     this.cargarValoresService = cargaValoresService;
   }
 
-
   ngOnInit() {
-    //todo esta propiedad hay que pasarla en el objeto principal o crear uno nuevo
-
+    //TODO: esta propiedad hay que pasarla en el objeto principal o crear uno nuevo
     this.setInputs<ElementoFormularioSeleccionable>(this.injector);
-    this.cargarValoresService
-      .execute(this.cargarValores)
-      .subscribe({
-        next: (valores) => {
-          this.opciones.length = 0;
-          valores.forEach((valor) => {
-            this.opciones.push(valor);
-          });
-        },
-        error: (error: any) => {
-          this.opciones = [];
-        }
-      });
+    this.cargarValoresInciales();
   }
 }
 
